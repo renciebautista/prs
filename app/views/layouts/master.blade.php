@@ -46,6 +46,7 @@
 							<ul class="dropdown-menu" aria-labelledby="themes">
 								<li>{{ HTML::linkRoute('user.index', 'User') }}</li>
 								<li>{{ HTML::linkRoute('department.index', 'Department') }}</li>
+								<li>{{ HTML::linkRoute('role.index', 'Role') }}</li>
 							</ul>
 						</li>
 						<li class="dropdown">

@@ -23,6 +23,8 @@ Route::resource('account-type', 'AccountTypeController');//
 Route::resource('user', 'UsersController');
 
 Route::resource('department', 'DepartmentController');
+
+Route::resource('role', 'RoleController');
 // Confide routes
 // Route::get('users', 'UsersController@index');
 // Route::get('users/create', 'UsersController@create');

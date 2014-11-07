@@ -1,35 +1,35 @@
 <?php
 
-class DepartmentController extends \BaseController {
+class RoleController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.
-	 * GET /department
+	 * GET /role
 	 *
 	 * @return Response
 	 */
 	public function index()
 	{
-		$departments = Department::all();
-		$pagetitle = 'User Departments';
-		return View::make('department.index',compact('departments', 'pagetitle'));
+		$roles = Role::orderBy('name')->get();
+		$pagetitle = 'User Roles';
+		return View::make('role.index', compact('roles', 'pagetitle'));
 	}
 
 	/**
 	 * Show the form for creating a new resource.
-	 * GET /department/create
+	 * GET /role/create
 	 *
 	 * @return Response
 	 */
 	public function create()
 	{
-		$pagetitle = 'New User Department';
-		return View::make('department.create',compact('pagetitle'));
+		$pagetitle = 'New User Role';
+		return View::make('role.create',compact('pagetitle'));
 	}
 
 	/**
 	 * Store a newly created resource in storage.
-	 * POST /department
+	 * POST /role
 	 *
 	 * @return Response
 	 */
@@ -38,20 +38,20 @@ class DepartmentController extends \BaseController {
 		Input::merge(array_map('trim', Input::all()));
 		$input = Input::all();
 
-		$validation = Validator::make($input, Department::$rules);
+		$validation = Validator::make($input, Role::$rules);
 
 		if($validation->passes())
 		{
-			$department = new Department();
-			$department->department_desc = strtoupper(Input::get('department_desc'));
-			$department->save();
+			$role = new Role();
+			$role->name = strtoupper(Input::get('name'));
+			$role->save();
 
-			return Redirect::route('department.index')
+			return Redirect::route('role.index')
 				->with('class', 'alert-success')
 				->with('message', 'Record successfuly created.');
 		}
 
-		return Redirect::route('department.create')
+		return Redirect::route('role.create')
 			->withInput()
 			->withErrors($validation)
 			->with('class', 'alert-danger')
@@ -60,39 +60,39 @@ class DepartmentController extends \BaseController {
 
 	/**
 	 * Display the specified resource.
-	 * GET /department/{id}
+	 * GET /role/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
 	public function show($id)
 	{
-		return Redirect::route('department.edit',$id);
+		return Redirect::route('role.edit',$id);
 	}
 
 	/**
 	 * Show the form for editing the specified resource.
-	 * GET /department/{id}/edit
+	 * GET /role/{id}/edit
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
 	public function edit($id)
 	{
-		$department = Department::find($id);
-		if (is_null($department))
+		$role = Role::find($id);
+		if (is_null($role))
 		{
-			return Redirect::route('department.index')
+			return Redirect::route('role.index')
 				->with('class', 'alert-danger')
 				->with('message', 'Record does not exist.');
 		}
-		$pagetitle = 'Edit User Department';
-		return View::make('department.edit', compact('department','pagetitle'));
+		$pagetitle = 'Edit User Role';
+		return View::make('role.edit', compact('role','pagetitle'));
 	}
 
 	/**
 	 * Update the specified resource in storage.
-	 * PUT /department/{id}
+	 * PUT /role/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -102,24 +102,24 @@ class DepartmentController extends \BaseController {
 		Input::merge(array_map('trim', Input::all()));
 		$input = Input::all();
 
-		$validation = Validator::make($input, Department::$rules);
+		$validation = Validator::make($input, Role::$rules);
 		if ($validation->passes())
 		{
-			$department = Department::find($id);
-			if (is_null($department))
+			$role = Role::find($id);
+			if (is_null($role))
 			{
-				return Redirect::route('department.index')
+				return Redirect::route('role.index')
 					->with('class', 'alert-danger')
 					->with('message', 'Record does not exist.');
 			}
-			$department->department_desc = strtoupper(Input::get('department_desc'));
-			$department->save();
-			return Redirect::route('department.index')
+			$role->name = strtoupper(Input::get('name'));
+			$role->save();
+			return Redirect::route('role.index')
 				->with('class', 'alert-success')
 				->with('message', 'Record successfuly updated.');
 		}
 
-		return Redirect::route('department.edit', $id)
+		return Redirect::route('role.edit', $id)
 			->withInput()
 			->withErrors($validation)
 			->with('class', 'alert-danger')
@@ -128,15 +128,15 @@ class DepartmentController extends \BaseController {
 
 	/**
 	 * Remove the specified resource from storage.
-	 * DELETE /department/{id}
+	 * DELETE /role/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
 	public function destroy($id)
 	{
-		$department = Department::find($id)->delete();
-		if (is_null($department))
+		$role = Role::find($id)->delete();
+		if (is_null($role))
 		{
 			$class = 'alert-danger';
 			$message = 'Record does not exist.';
@@ -144,7 +144,7 @@ class DepartmentController extends \BaseController {
 			$class = 'alert-success';
 			$message = 'Record successfully deleted.';
 		}
-		return Redirect::route('department.index')
+		return Redirect::route('role.index')
 				->with('class', $class )
 				->with('message', $message);
 	}

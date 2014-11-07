@@ -30,7 +30,9 @@ class UsersController extends Controller
     public function create()
     {
         $pagetitle = 'New User';
-        return View::make('user.create',compact('pagetitle'));
+        $departments = Department::orderBy('department_desc')->lists('department_desc', 'id');
+        $roles = Role::orderBy('name')->lists('name', 'id');
+        return View::make('user.create',compact('pagetitle','departments', 'roles'));
     }
 
     /**

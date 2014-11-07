@@ -112,7 +112,8 @@ class AccountTypeController extends \BaseController {
 					->with('class', 'alert-danger')
 					->with('message', 'Record does not exist.');
 			}
-			$accounttype->update($input);
+			$accounttype->account_type = strtoupper(Input::get('account_type'));
+			$accounttype->save();
 			return Redirect::route('account-type.index')
 				->with('class', 'alert-success')
 				->with('message', 'Record successfuly updated.');
@@ -144,7 +145,7 @@ class AccountTypeController extends \BaseController {
 			$class = 'alert-success';
 			$message = 'Record successfully deleted.';
 		}
-        return Redirect::route('account-type.index')
+		return Redirect::route('account-type.index')
 				->with('class', $class )
 				->with('message', $message);
 	}

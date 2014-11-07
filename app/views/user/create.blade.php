@@ -22,13 +22,13 @@
 		</div>
 
 		<div class="form-group">
-			{{ Form::label('emp_id', 'Department', array('class' => 'control-label')) }}
-			{{ Form::text('emp_id','',array('class' => 'form-control', 'placeholder' => 'Department')) }}
+			{{ Form::label('department_id', 'Department', array('class' => 'control-label')) }}
+			{{ Form::select('department_id', $departments, null, array('class' => 'form-control')) }}
 		</div>
 
 		<div class="form-group">
-			{{ Form::label('emp_id', 'Group', array('class' => 'control-label')) }}
-			{{ Form::text('emp_id','',array('class' => 'form-control', 'placeholder' => 'Account Type')) }}
+			{{ Form::label('role_id', 'Role', array('class' => 'control-label')) }}
+			{{ Form::select('role_id', $roles, null, array('class' => 'form-control')) }}
 		</div>
 
 		<div class="form-group">
