@@ -56,12 +56,11 @@
 							</ul>
 						</li>
 						<li class="dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Transaction <span class="caret"></span></a>
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Projects <span class="caret"></span></a>
 							<ul class="dropdown-menu" aria-labelledby="download">
-								<li><a href="./sales/create">Sales Entry</a></li>
-								<li><a href="./bootstrap.css">Item Incomming</a></li>
-								<li><a href="./bootstrap.css">Item Fullout</a></li>
-								<li><a href="./bootstrap.css">Stock Adjustment</a></li>
+								<li><a href="./sales/create">Public Projects</a></li>
+								<li>{{ HTML::linkRoute('drafted-project.index', 'Drafted Projects') }}</li>
+								<li><a href="./bootstrap.css">Assigned Projects</a></li>
 							</ul>
 						</li>
 						<li class="dropdown">
@@ -102,6 +101,14 @@
 					{{ Session::get('message') }}
 				</div>
             @endif
+
+            @if (Session::get('error'))
+	            <div class="alert alert-error alert-danger">
+	                @if (is_array(Session::get('error')))
+	                    {{ head(Session::get('error')) }}
+	                @endif
+	            </div>
+	        @endif
 
             @if ($errors->any())
 			    <ul>

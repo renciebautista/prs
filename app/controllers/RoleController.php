@@ -149,4 +149,8 @@ class RoleController extends \BaseController {
 				->with('message', $message);
 	}
 
+
+	public function manageprivilleges($id){
+		
+	}
 }

@@ -13,23 +13,25 @@
 
 <div class="row">
 	<div class="col-lg-12">
-		<div class="bs-component">
-			<table class="table table-striped table-hover ">
+		<div class="table-responsive">
+			<table class="table table-striped table-hover">
 				<thead>
 					<tr>
 						<th>Role</th>
+						<th>Privilleges</th>
 						<th colspan="2" style="text-align:center;">Action</th>
 					</tr>
 				</thead>
 				<tbody>
 					@if(count($roles) == 0)
 					<tr>
-						<td colspan="3">No record found!</td>
+						<td colspan="4">No record found!</td>
 					</tr>
 					@else
 					@foreach($roles as $role)
 					<tr>
 						<td>{{ $role->name}}</td>
+						<td>{{ HTML::linkRoute('role.manageprivilleges', 'Manage Privilleges', $role->id) }}</td>
 						<td class="action">
 							{{ HTML::linkRoute('role.edit','Edit', $role->id, array('class' => 'btn btn-info btn-xs')) }}
 						</td>

@@ -5,20 +5,20 @@
 <div class="row">
 
 	<div class="col-lg-4">
-	{{ Form::open(array('route' => 'account-type.store','class' => 'bs-component')) }}
+	{{ Form::open(array('route' => 'user.store','class' => 'bs-component')) }}
 		<div class="form-group">
-			{{ Form::label('full_name', 'Full Name', array('class' => 'control-label')) }}
-			{{ Form::text('full_name','',array('class' => 'form-control', 'placeholder' => 'Full Name')) }}
+			{{ Form::label('first_name', 'First Name', array('class' => 'control-label')) }}
+			{{ Form::text('first_name','',array('class' => 'form-control', 'placeholder' => 'First Name')) }}
+		</div>
+
+		<div class="form-group">
+			{{ Form::label('last_name', 'Last Name', array('class' => 'control-label')) }}
+			{{ Form::text('last_name','',array('class' => 'form-control', 'placeholder' => 'Last Name')) }}
 		</div>
 
 		<div class="form-group">
 			{{ Form::label('emp_id', 'Employee Id', array('class' => 'control-label')) }}
 			{{ Form::text('emp_id','',array('class' => 'form-control', 'placeholder' => 'Employee Id')) }}
-		</div>
-
-		<div class="form-group">
-			{{ Form::label('email', 'Email Address', array('class' => 'control-label')) }}
-			{{ Form::text('email','',array('class' => 'form-control', 'placeholder' => 'Email Address')) }}
 		</div>
 
 		<div class="form-group">
@@ -32,9 +32,25 @@
 		</div>
 
 		<div class="form-group">
-			{{ Form::label('emp_id', 'Bank Account', array('class' => 'control-label')) }}
-			{{ Form::text('emp_id','',array('class' => 'form-control', 'placeholder' => 'Account Type')) }}
+			{{ Form::label('username', 'Username', array('class' => 'control-label')) }}
+			{{ Form::text('username','',array('class' => 'form-control', 'placeholder' => 'Username')) }}
 		</div>
+
+		<div class="form-group">
+			{{ Form::label('email', 'Email Address', array('class' => 'control-label')) }}
+			{{ Form::text('email','',array('class' => 'form-control', 'placeholder' => 'Email Address')) }}
+		</div>
+
+		<div class="form-group">
+			{{ Form::label('password', 'Password', array('class' => 'control-label')) }}
+			{{ Form::password('password',array('class' => 'form-control', 'placeholder' => 'Password')) }}
+		</div>
+
+		<div class="form-group">
+			{{ Form::label('password_confirmation', 'Password Confirmation', array('class' => 'control-label')) }}
+			{{ Form::password('password_confirmation',array('class' => 'form-control', 'placeholder' => 'Password Confirmation')) }}
+		</div>
+
 
 		<div class="form-group">
 			{{ Form::submit('Submit', array('class' => 'btn btn-primary')) }}

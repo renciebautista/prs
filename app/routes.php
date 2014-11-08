@@ -25,6 +25,9 @@ Route::resource('user', 'UsersController');
 Route::resource('department', 'DepartmentController');
 
 Route::resource('role', 'RoleController');
+Route::get('role/{id}/manageprivilleges', array('as' => 'role.manageprivilleges', 'uses' => 'RoleController@manageprivilleges'));
+
+Route::resource('drafted-project', 'DraftedProjectController');
 // Confide routes
 // Route::get('users', 'UsersController@index');
 // Route::get('users/create', 'UsersController@create');
