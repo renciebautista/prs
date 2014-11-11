@@ -23,7 +23,7 @@
 			  @endforeach
 			@endif
 
-		{{ Form::open(array('action' => 'UsersController@doLogin','class' => 'bs-component')) }}
+		{{ Form::open(array('action' => 'SessionController@doLogin','class' => 'bs-component')) }}
 
 			<div class="form-group">
 				{{ Form::label('email', 'Username or Email', array('class' => 'control-label')) }}

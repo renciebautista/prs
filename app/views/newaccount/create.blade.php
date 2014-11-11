@@ -8,7 +8,7 @@
 	{{ Form::open(array('route' => 'new-account.store','class' => 'bs-component')) }}
 		<div class="form-group">
 			{{ Form::label('account_type_id', 'Account Type', array('class' => 'control-label')) }}
-			{{ Form::text('account_type_id','',array('class' => 'form-control', 'placeholder' => 'Account Type')) }}
+			{{ Form::select('account_type_id', $account_types, null, array('class' => 'form-control')) }}
 		</div>
 
 		<div class="form-group">
@@ -24,13 +24,13 @@
 				<div class="col-lg-6">
 					<div class="form-group">
 						{{ Form::label('lot', 'Lot / Blk / House No. / Unit No.', array('class' => 'control-label')) }}
-						<input id="lot" class="form-control" type="text" placeholder="Lot / Blk / House No. / Unit No." name="lot" value="">
+						{{ Form::text('lot','',array('class' => 'form-control', 'placeholder' => 'Lot / Blk / House No. / Unit No.')) }}
 					</div>
 				</div>
 				<div class="col-lg-6">
 					<div class="form-group">
 						{{ Form::label('street', 'Street', array('class' => 'control-label')) }}
-						<input id="street" class="form-control" type="text" placeholder="Street" name="street" value="">
+						{{ Form::text('street','',array('class' => 'form-control', 'placeholder' => 'Street')) }}
 					</div>
 				</div>
 			</div>
@@ -38,18 +38,20 @@
 
 		<div class="form-group">
 			{{ Form::label('brgy', 'Brgy. / Subdivision', array('class' => 'control-label')) }}
-			{{ Form::text('department_desc','',array('class' => 'form-control', 'placeholder' => 'Project Name')) }}
+			{{ Form::text('brgy','',array('class' => 'form-control', 'placeholder' => 'Brgy. / Subdivision')) }}
 		</div>
 
 		<div class="form-group">
 			{{ Form::label('city_id', 'Town / City', array('class' => 'control-label')) }}
-			{{ Form::text('department_desc','',array('class' => 'form-control', 'placeholder' => 'Project Name')) }}
+			{{ Form::text('city_id','',array('class' => 'form-control', 'placeholder' => 'Project Name')) }}
 		</div>
 
 		<div class="form-group">
 			{{ Form::submit('Submit', array('class' => 'btn btn-primary')) }}
 			{{ HTML::linkRoute('new-account.index', 'Back', array(), array('class' => 'btn btn-default')) }}
 		</div>
+
+		
 	{{ Form::close() }}
 	</div>
 </div>

@@ -83,7 +83,7 @@ class SessionController extends \BaseController {
                 $err_msg = Lang::get('confide::confide.alerts.wrong_credentials');
             }
 
-            return Redirect::action('UsersController@login')
+            return Redirect::action('SessionController@login')
                 ->withInput(Input::except('password'))
                 ->with('error', $err_msg);
         }

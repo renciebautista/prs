@@ -41,6 +41,7 @@
 				</div>
 				<div class="navbar-collapse collapse" id="navbar-main">
 					<ul class="nav navbar-nav">
+						@if(Auth::user()->hasRole("ADMIN"))
 						<li class="dropdown">
 							<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">User Maintenance <span class="caret"></span></a>
 							<ul class="dropdown-menu" aria-labelledby="themes">
@@ -55,6 +56,7 @@
 								<li>{{ HTML::linkRoute('account-type.index', 'Account Type') }}</li>
 							</ul>
 						</li>
+						@endif
 						<li class="dropdown">
 							<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Projects <span class="caret"></span></a>
 							<ul class="dropdown-menu" aria-labelledby="download">
@@ -66,9 +68,18 @@
 						<li class="dropdown">
 							<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Contacts <span class="caret"></span></a>
 							<ul class="dropdown-menu" aria-labelledby="download">
+								<li>{{ HTML::linkRoute('new-account.index', 'New Contact') }}</li>
+								<li><a href="./bootstrap.css">My Contacts</a></li>
+								<li>{{ HTML::linkRoute('account-approval.index', 'Contact Approval') }}</li>
+							</ul>
+						</li>
+
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Accounts <span class="caret"></span></a>
+							<ul class="dropdown-menu" aria-labelledby="download">
 								<li>{{ HTML::linkRoute('new-account.index', 'New Accounts') }}</li>
-								
-								<li><a href="./bootstrap.css">Contact Persons</a></li>
+								<li><a href="./bootstrap.css">My Accounts</a></li>
+								<li>{{ HTML::linkRoute('account-approval.index', 'Account Approval') }}</li>
 							</ul>
 						</li>
 						<li class="dropdown">

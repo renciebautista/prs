@@ -17,9 +17,7 @@
 			<table class="table table-striped table-hover">
 				<thead>
 					<tr>
-						<th>Full Name</th>
-						<th>Department</th>
-						<th>Role</th>
+						<th>Account Name</th>
 						<th colspan="2" style="text-align:center;">Action</th>
 					</tr>
 				</thead>
@@ -31,13 +29,7 @@
 					@else
 					@foreach($newaccounts as $newaccount)
 					<tr>
-						<td>{{ $newaccount->getFullname() }}</td>
-						<td>{{ $newaccount->department->department_desc }}</td>
-						<td>
-							@foreach($newaccount->roles as $role)
-							{{ $role->name }}
-							@endforeach
-						</td>
+						<td>{{ $newaccount->account_name }}</td>
 						<td class="action">
 							{{ HTML::linkRoute('account-type.edit','Edit', $newaccount->id, array('class' => 'btn btn-info btn-xs')) }}
 						</td>

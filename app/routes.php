@@ -16,33 +16,38 @@ Route::get('/', function()
 	return View::make('hello');
 });
 
-Route::resource('dashboard', 'DashboardController');
 
-Route::resource('account-type', 'AccountTypeController');//
+Route::group(array('before' => 'auth'), function()
+{
+	Route::resource('dashboard', 'DashboardController');
 
-Route::resource('user', 'UsersController');
+	Route::resource('account-type', 'AccountTypeController');//
 
-Route::resource('department', 'DepartmentController');
+	Route::resource('user', 'UsersController');
 
-Route::resource('role', 'RoleController');
-Route::get('role/{id}/manageprivilleges', array('as' => 'role.manageprivilleges', 'uses' => 'RoleController@manageprivilleges'));
+	Route::resource('department', 'DepartmentController');
 
-Route::resource('drafted-project', 'DraftedProjectController');
+	Route::resource('role', 'RoleController');
+	Route::get('role/{id}/manageprivilleges', array('as' => 'role.manageprivilleges', 'uses' => 'RoleController@manageprivilleges'));
 
-Route::resource('new-account', 'NewAccountController');
+	Route::resource('drafted-project', 'DraftedProjectController');
+
+	Route::resource('new-account', 'NewAccountController');
+	Route::resource('account-approval', 'AccountApprovalController');
+});
 // Confide routes
 // Route::get('users', 'UsersController@index');
 // Route::get('users/create', 'UsersController@create');
 // Route::post('users', 'UsersController@store');
 
-// Route::get('login', 'UsersController@login');
-// Route::post('login', 'UsersController@doLogin');
+Route::get('login', 'SessionController@login');
+Route::post('login', 'SessionController@doLogin');
 
-// Route::get('users/confirm/{code}', 'UsersController@confirm');
-// Route::get('forgot_password', 'UsersController@forgotPassword');
-// Route::post('forgot_password', 'UsersController@doForgotPassword');
+Route::get('users/confirm/{code}', 'UsersController@confirm');
+Route::get('forgot_password', 'UsersController@forgotPassword');
+Route::post('forgot_password', 'UsersController@doForgotPassword');
 
-// Route::get('users/reset_password/{token}', 'UsersController@resetPassword');
-// Route::post('users/reset_password', 'UsersController@doResetPassword');
+Route::get('users/reset_password/{token}', 'UsersController@resetPassword');
+Route::post('users/reset_password', 'UsersController@doResetPassword');
 
-// Route::get('users/logout', 'UsersController@logout');
+Route::get('users/logout', 'UsersController@logout');

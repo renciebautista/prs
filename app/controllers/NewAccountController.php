@@ -11,7 +11,7 @@ class NewAccountController extends \BaseController {
 	public function index()
 	{
 		$pagetitle = 'New Account Lists';
-		$newaccounts = array();
+		$newaccounts = NewAccount::all();
 		return View::make('newaccount.index',compact('pagetitle', 'newaccounts'));
 	}
 
@@ -24,7 +24,8 @@ class NewAccountController extends \BaseController {
 	public function create()
 	{
 		$pagetitle = 'New Account';
-		return View::make('newaccount.create',compact('pagetitle'));
+		$account_types = AccountType::orderBy('account_type')->lists('account_type', 'id');
+		return View::make('newaccount.create',compact('pagetitle','account_types'));
 	}
 
 	/**
@@ -35,7 +36,31 @@ class NewAccountController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		Input::merge(array_map('trim', Input::all()));
+		$input = Input::all();
+
+		$validation = Validator::make($input, NewAccount::$rules);
+
+		if($validation->passes())
+		{
+			$user = new NewAccount;
+			$user->created_by = Auth::id();
+			$user->account_type_id = Input::get('account_type_id');
+			$user->account_name =  strtoupper(Input::get('account_name'));
+			$user->lot = Input::get('lot');
+			$user->street = Input::get('street');
+			$user->brgy = Input::get('brgy');
+			$user->save();
+
+			return Redirect::route('new-account.index')
+				->with('class', 'alert-success')
+				->with('message', 'Record successfuly created.');
+		}
+
+		return Redirect::route('new-account.create')
+			->withErrors($validation)
+			->with('class', 'alert-danger')
+			->with('message', 'There were validation errors.');
 	}
 
 	/**

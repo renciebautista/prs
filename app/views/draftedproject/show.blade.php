@@ -21,7 +21,7 @@
 
 	<div class="col-lg-8">
 		<div class="row">
-	<div class="col-lg-12">
+		<div class="col-lg-12">
 		<div class="panel panel-primary">
 		  	<div class="panel-heading">
 				<h3 class="panel-title">Project Owner</h3>
