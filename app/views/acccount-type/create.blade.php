@@ -4,7 +4,7 @@
 
 <div class="row">
 
-	<div class="col-lg-4">
+	<div class="col-lg-6">
 	{{ Form::open(array('route' => 'account-type.store','class' => 'bs-component')) }}
 		<div class="form-group">
 			{{ Form::label('account_type', 'Account Type', array('class' => 'control-label')) }}

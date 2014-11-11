@@ -4,7 +4,7 @@
 
 <div class="row">
 
-	<div class="col-lg-4">
+	<div class="col-lg-6">
 	{{ Form::open(array('route' => array('role.update', $role->id), 'method' => 'PUT', 'class' => 'bs-component')) }}
 		<div class="form-group">
 			{{ Form::label('name', 'Role') }}

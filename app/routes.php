@@ -28,6 +28,8 @@ Route::resource('role', 'RoleController');
 Route::get('role/{id}/manageprivilleges', array('as' => 'role.manageprivilleges', 'uses' => 'RoleController@manageprivilleges'));
 
 Route::resource('drafted-project', 'DraftedProjectController');
+
+Route::resource('new-account', 'NewAccountController');
 // Confide routes
 // Route::get('users', 'UsersController@index');
 // Route::get('users/create', 'UsersController@create');

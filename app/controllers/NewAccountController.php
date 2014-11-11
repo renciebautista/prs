@@ -1,59 +1,58 @@
 <?php
 
-class DraftedProjectController extends \BaseController {
+class NewAccountController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.
-	 * GET /draftedproject
+	 * GET /newaccount
 	 *
 	 * @return Response
 	 */
 	public function index()
 	{
-		$pagetitle = 'Drafted Projects';
-		$projects = array();
-		return View::make('draftedproject.index',compact('projects','pagetitle'));
+		$pagetitle = 'New Account Lists';
+		$newaccounts = array();
+		return View::make('newaccount.index',compact('pagetitle', 'newaccounts'));
 	}
 
 	/**
 	 * Show the form for creating a new resource.
-	 * GET /draftedproject/create
+	 * GET /newaccount/create
 	 *
 	 * @return Response
 	 */
 	public function create()
 	{
-		$pagetitle = 'New Project';
-		return View::make('draftedproject.create',compact('pagetitle'));
+		$pagetitle = 'New Account';
+		return View::make('newaccount.create',compact('pagetitle'));
 	}
 
 	/**
 	 * Store a newly created resource in storage.
-	 * POST /draftedproject
+	 * POST /newaccount
 	 *
 	 * @return Response
 	 */
 	public function store()
 	{
-		
+		//
 	}
 
 	/**
 	 * Display the specified resource.
-	 * GET /draftedproject/{id}
+	 * GET /newaccount/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
 	public function show($id)
 	{
-		$pagetitle = 'Project Details';
-		return View::make('draftedproject.show',compact('pagetitle'));
+		//
 	}
 
 	/**
 	 * Show the form for editing the specified resource.
-	 * GET /draftedproject/{id}/edit
+	 * GET /newaccount/{id}/edit
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -65,7 +64,7 @@ class DraftedProjectController extends \BaseController {
 
 	/**
 	 * Update the specified resource in storage.
-	 * PUT /draftedproject/{id}
+	 * PUT /newaccount/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -77,7 +76,7 @@ class DraftedProjectController extends \BaseController {
 
 	/**
 	 * Remove the specified resource from storage.
-	 * DELETE /draftedproject/{id}
+	 * DELETE /newaccount/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response

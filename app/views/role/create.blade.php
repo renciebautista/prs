@@ -4,7 +4,7 @@
 
 <div class="row">
 
-	<div class="col-lg-4">
+	<div class="col-lg-6">
 	{{ Form::open(array('route' => 'role.store','class' => 'bs-component')) }}
 		<div class="form-group">
 			{{ Form::label('name', 'Role', array('class' => 'control-label')) }}

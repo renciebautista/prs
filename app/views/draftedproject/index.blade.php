@@ -5,7 +5,7 @@
 <div class="row">
 	<div class="col-lg-12">
 		<div >
-			<a href="{{ URL::route('role.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Project</a>
+			<a href="{{ URL::route('drafted-project.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Project</a>
 		</div>
 		
 	</div>

@@ -64,6 +64,14 @@
 							</ul>
 						</li>
 						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Contacts <span class="caret"></span></a>
+							<ul class="dropdown-menu" aria-labelledby="download">
+								<li>{{ HTML::linkRoute('new-account.index', 'New Accounts') }}</li>
+								
+								<li><a href="./bootstrap.css">Contact Persons</a></li>
+							</ul>
+						</li>
+						<li class="dropdown">
 							<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Report <span class="caret"></span></a>
 							<ul class="dropdown-menu" aria-labelledby="download">
 								<li><a href="./sales/create">Sales Report</a></li>
