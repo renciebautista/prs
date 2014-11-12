@@ -108,4 +108,5 @@ class NewAccount extends Eloquent {
 			})
 			->get();
 	}
+
 }

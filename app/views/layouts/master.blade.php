@@ -78,7 +78,7 @@
 							<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Accounts <span class="caret"></span></a>
 							<ul class="dropdown-menu" aria-labelledby="download">
 								<li>{{ HTML::linkRoute('new-account.index', 'New Accounts') }}</li>
-								<li><a href="./bootstrap.css">My Accounts</a></li>
+								<li>{{ HTML::linkRoute('account.index', 'My Accounts') }}</li>
 								<li>{{ HTML::linkRoute('account-approval.index', 'Account Approval') }}</li>
 							</ul>
 						</li>

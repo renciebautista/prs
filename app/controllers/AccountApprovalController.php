@@ -82,22 +82,33 @@ class AccountApprovalController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		$newaccount = NewAccount::where('approved',0)
-			->where('id',$id)
-			->first();
-
-		if (is_null($newaccount))
+		DB::transaction(function($id) use ($id)
 		{
-			return Redirect::route('account-approval.index')
-				->with('class', 'alert-danger')
-				->with('message', 'Record does not exist.');
-		}
-		if(Input::has('same')){
-			$newaccount->same_as = Input::get('same_as');
-		}
-		$newaccount->approved = 1;
-		$newaccount->approved_by = Auth::id();
-		$newaccount->save();
+			$newaccount = NewAccount::where('approved',0)
+				->where('id',$id)
+				->first();
+			
+			if (is_null($newaccount))
+			{
+				return Redirect::route('account-approval.index')
+					->with('class', 'alert-danger')
+					->with('message', 'Record does not exist.');
+			}
+
+			if(Input::has('same')){
+				$newaccount->same_as = Input::get('same_as');
+				$account_id = $newaccount->same_as;
+
+			}else{
+				$account_id = $id;
+			}
+
+			$newaccount->approved = 1;
+			$newaccount->approved_by = Auth::id();
+			$newaccount->save();
+
+			UserAccount::addAccount($newaccount->created_by,$account_id,$id);
+		});
 
 		return Redirect::route('account-approval.index')
 			->with('class', 'alert-success')

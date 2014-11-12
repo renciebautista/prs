@@ -10,7 +10,9 @@ class AccountController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+		$pagetitle = "My Accounts";
+		$accounts = UserAccount::myAccounts(Auth::id());
+		return View::make('account.index', compact('pagetitle', 'accounts'));
 	}
 
 	/**

@@ -14,17 +14,17 @@
 					</tr>
 				</thead>
 				<tbody>
-					@if(count($newaccounts) == 0)
+					@if(count($accounts) == 0)
 					<tr>
 						<td colspan="3">No record found!</td>
 					</tr>
 					@else
-					@foreach($newaccounts as $newaccount)
+					@foreach($accounts as $account)
 					<tr>
-						<td>{{ $newaccount->account_name }}</td>
-						<td>{{ ucwords(strtolower($newaccount->lot .' '.$newaccount->street .' '. $newaccount->brgy.' '.$newaccount->city.' - '.$newaccount->province)) }}</td>
+						<td>{{ $account->account_name }}</td>
+						<td>{{ ucwords(strtolower($account->lot .' '.$account->street .' '. $account->brgy.' '.$account->city.' - '.$account->province)) }}</td>
 						<td class="action">
-							{{ HTML::linkRoute('account-approval.edit','Edit', $newaccount->id, array('class' => 'btn btn-info btn-xs')) }}
+							{{ HTML::linkRoute('account.edit','More', $account->id, array('class' => 'btn btn-info btn-xs')) }}
 						</td>
 					</tr>
 					@endforeach

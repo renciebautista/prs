@@ -33,7 +33,10 @@ Route::group(array('before' => 'auth'), function()
 	Route::resource('drafted-project', 'DraftedProjectController');
 
 	Route::resource('new-account', 'NewAccountController');
+
 	Route::resource('account-approval', 'AccountApprovalController');
+
+	Route::resource('account', 'AccountController');
 });
 // Confide routes
 // Route::get('users', 'UsersController@index');
@@ -50,4 +53,4 @@ Route::post('forgot_password', 'UsersController@doForgotPassword');
 Route::get('users/reset_password/{token}', 'UsersController@resetPassword');
 Route::post('users/reset_password', 'UsersController@doResetPassword');
 
-Route::get('users/logout', 'UsersController@logout');
+Route::get('logout', 'SessionController@logout');

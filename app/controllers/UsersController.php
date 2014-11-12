@@ -56,7 +56,6 @@ class UsersController extends Controller
 			$user->username = Input::get('username');
 			$user->email = Input::get('email');
 			$user->password = Input::get('password');
-			$user->password_confirmation = Input::get('password_confirmation');
 			$user->confirmation_code = md5(uniqid(mt_rand(), true));
 			$user->confirmed = 1;
 			$user->active = 1;
