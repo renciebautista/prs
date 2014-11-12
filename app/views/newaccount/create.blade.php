@@ -43,7 +43,7 @@
 
 		<div class="form-group">
 			{{ Form::label('city_id', 'Town / City', array('class' => 'control-label')) }}
-			{{ Form::text('city_id','',array('class' => 'form-control', 'placeholder' => 'Project Name')) }}
+			{{ Form::select('city_id',$cities, null, array('class' => 'form-control')) }}
 		</div>
 
 		<div class="form-group">

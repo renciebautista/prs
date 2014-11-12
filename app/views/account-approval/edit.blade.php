@@ -1,10 +1,9 @@
 @extends('layouts.master')
 
 @section('content')
+{{ Form::open(array('route' => array('account-approval.update', $newaccount->id), 'method' => 'PUT', 'class' => 'bs-component')) }}
 <div class="row">
 	<div class="col-lg-12">
-	{{ Form::open(array('route' => 'new-account.store','class' => 'bs-component')) }}
-
 		<div class="form-group">
 			<div class="row">
 				<div class="col-lg-6">
@@ -42,20 +41,17 @@
 				<div class="col-lg-3">
 					<div class="form-group">
 						{{ Form::label('city_id', 'Town / City', array('class' => 'control-label')) }}
-						{{ Form::text('city_id','',array('class' => 'form-control', 'placeholder' => 'Project Name', 'disabled' => '')) }}
+						{{ Form::text('city_id', $newaccount->city.' - '.$newaccount->province, array('class' => 'form-control', 'placeholder' => 'Project Name', 'disabled' => '')) }}
 					</div>
 				</div>
 			</div>
 		</div>
 
 		<div class="form-group">
-			{{ Form::submit('Approve', array('class' => 'btn btn-primary')) }}
-			{{ Form::submit('Same Account', array('class' => 'btn btn-warning')) }}
+			<input class="btn btn-primary" type="submit" name="approve" id="approve" value="Approve">
+			<input class="btn btn-warning" type="submit" name="same" id="same" value="Same Account">
 			{{ HTML::linkRoute('account-approval.index', 'Back', array(), array('class' => 'btn btn-default')) }}
 		</div>
-
-		
-	{{ Form::close() }}
 	</div>
 </div>
 
@@ -65,10 +61,10 @@
 			<table class="table table-striped table-hover">
 				<thead>
 					<tr>
+						<th></th>
 						<th>Account Name</th>
 						<th>Account Type</th>
 						<th>Address</th>
-						<th colspan="2" style="text-align:center;">Action</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -79,16 +75,10 @@
 					@else
 					@foreach($approved_accounts as $approved_account)
 					<tr>
-						<td>{{ $approved_account->name}}</td>
-						<td>{{ HTML::linkRoute('approved_account.manageprivilleges', 'Manage Privilleges', $approved_account->id) }}</td>
-						<td class="action">
-							{{ HTML::linkRoute('approved_account.edit','Edit', $approved_account->id, array('class' => 'btn btn-info btn-xs')) }}
-						</td>
-						<td class="action">
-							{{ Form::open(array('method' => 'DELETE', 'route' => array('approved_account.destroy', $approved_account->id))) }}                       
-							{{ Form::submit('Delete', array('class'=> 'btn btn-danger btn-xs','onclick' => "if(!confirm('Are you sure to delete this record?')){return false;};")) }}
-							{{ Form::close() }}
-						</td>
+						<td>{{ Form::radio('same_as', $approved_account->id ) }}</td>
+						<td>{{ $approved_account->account_name }}</td>
+						<td>{{ $approved_account->account_type }}</td>
+						<td>{{ $approved_account->lot .' '.$approved_account->street .' '. $approved_account->brgy.' '.$approved_account->city.' - '.$approved_account->province}}</td>
 					</tr>
 					@endforeach
 					@endif
@@ -97,4 +87,5 @@
 		</div>
 	</div>
 </div>
+{{ Form::close() }}
 @stop

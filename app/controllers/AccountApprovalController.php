@@ -11,7 +11,7 @@ class AccountApprovalController extends \BaseController {
 	public function index()
 	{
 		$pagetitle = 'Accounts for Approval';
-		$newaccounts = NewAccount::all();
+		$newaccounts = NewAccount::get_for_approval();
 		return View::make('account-approval.index',compact('pagetitle', 'newaccounts'));
 	}
 
@@ -59,8 +59,17 @@ class AccountApprovalController extends \BaseController {
 	public function edit($id)
 	{
 		$pagetitle = 'New Account Approval';
-		$newaccount = NewAccount::get_by_id($id);
-		$approved_accounts = array();
+
+		$newaccount = NewAccount::get_for_approval_by_id($id);
+
+		if (is_null($newaccount))
+		{
+			return Redirect::route('account-approval.index')
+				->with('class', 'alert-danger')
+				->with('message', 'Record does not exist.');
+		}
+
+		$approved_accounts = NewAccount::get_approved($newaccount);
 		return View::make('account-approval.edit',compact('pagetitle', 'newaccount', 'approved_accounts'));
 	}
 
@@ -73,7 +82,26 @@ class AccountApprovalController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$newaccount = NewAccount::where('approved',0)
+			->where('id',$id)
+			->first();
+
+		if (is_null($newaccount))
+		{
+			return Redirect::route('account-approval.index')
+				->with('class', 'alert-danger')
+				->with('message', 'Record does not exist.');
+		}
+		if(Input::has('same')){
+			$newaccount->same_as = Input::get('same_as');
+		}
+		$newaccount->approved = 1;
+		$newaccount->approved_by = Auth::id();
+		$newaccount->save();
+
+		return Redirect::route('account-approval.index')
+			->with('class', 'alert-success')
+			->with('message', 'Account successfuly added.');
 	}
 
 	/**

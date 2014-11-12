@@ -11,7 +11,7 @@ class NewAccountController extends \BaseController {
 	public function index()
 	{
 		$pagetitle = 'New Account Lists';
-		$newaccounts = NewAccount::all();
+		$newaccounts = NewAccount::get_for_approval_by_user_id(Auth::id());
 		return View::make('newaccount.index',compact('pagetitle', 'newaccounts'));
 	}
 
@@ -25,7 +25,8 @@ class NewAccountController extends \BaseController {
 	{
 		$pagetitle = 'New Account';
 		$account_types = AccountType::orderBy('account_type')->lists('account_type', 'id');
-		return View::make('newaccount.create',compact('pagetitle','account_types'));
+		$cities = City::get_all();
+		return View::make('newaccount.create',compact('pagetitle','account_types','cities'));
 	}
 
 	/**
@@ -43,14 +44,15 @@ class NewAccountController extends \BaseController {
 
 		if($validation->passes())
 		{
-			$user = new NewAccount;
-			$user->created_by = Auth::id();
-			$user->account_type_id = Input::get('account_type_id');
-			$user->account_name =  strtoupper(Input::get('account_name'));
-			$user->lot = Input::get('lot');
-			$user->street = Input::get('street');
-			$user->brgy = Input::get('brgy');
-			$user->save();
+			$newaccount = new NewAccount;
+			$newaccount->created_by = Auth::id();
+			$newaccount->account_type_id = Input::get('account_type_id');
+			$newaccount->account_name =  strtoupper(Input::get('account_name'));
+			$newaccount->lot = Input::get('lot');
+			$newaccount->street = Input::get('street');
+			$newaccount->brgy = Input::get('brgy');
+			$newaccount->city_id = Input::get('city_id');
+			$newaccount->save();
 
 			return Redirect::route('new-account.index')
 				->with('class', 'alert-success')
@@ -96,7 +98,7 @@ class NewAccountController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		
 	}
 
 	/**

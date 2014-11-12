@@ -27,7 +27,7 @@ class AddFullNameOnUsersTable extends Migration {
 	public function down()
 	{
 		Schema::table('users', function($table){
-			$table->dropColumn('first_name', 'last_name','active');
+			$table->dropColumn(array('first_name', 'last_name','active'));
 		});
 	}
 
