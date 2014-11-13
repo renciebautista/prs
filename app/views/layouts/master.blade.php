@@ -43,16 +43,14 @@
 					<ul class="nav navbar-nav">
 						@if(Auth::user()->hasRole("ADMIN"))
 						<li class="dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">User Maintenance <span class="caret"></span></a>
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Settings<span class="caret"></span></a>
 							<ul class="dropdown-menu" aria-labelledby="themes">
+								<li class="dropdown-header">User Maintenance</li>
 								<li>{{ HTML::linkRoute('user.index', 'User') }}</li>
 								<li>{{ HTML::linkRoute('department.index', 'Department') }}</li>
 								<li>{{ HTML::linkRoute('role.index', 'Role') }}</li>
-							</ul>
-						</li>
-						<li class="dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">File Maintenance <span class="caret"></span></a>
-							<ul class="dropdown-menu" aria-labelledby="themes">
+								<li class="divider"></li>
+								<li class="dropdown-header">File Maintenance</li>
 								<li>{{ HTML::linkRoute('account-type.index', 'Account Type') }}</li>
 								<li>{{ HTML::linkRoute('account-group.index', 'Account Group') }}</li>
 							</ul>
