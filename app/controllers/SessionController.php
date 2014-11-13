@@ -188,7 +188,7 @@ class SessionController extends \BaseController {
     {
         Confide::logout();
 
-        return Redirect::to('/');
+        return Redirect::to('/dashboard');
     }
 
 }

@@ -9,14 +9,30 @@ class NewAccount extends Eloquent {
 		'city_id' => 'required'
 	);
 
-	public static function get_for_approval_by_user_id($id){
+	public static function accountExist($account){
+		return DB::table('new_accounts')
+			->select('new_accounts.*','cities.city','provinces.province','account_types.account_type')
+			->join('account_types', 'account_types.id', '=', 'new_accounts.account_type_id')
+			->join('cities', 'cities.id', '=', 'new_accounts.city_id')
+			->join('provinces', 'provinces.id', '=', 'cities.province_id')
+			->where('account_name', $account->account_name)
+			->where('lot', $account->lot)
+			->where('street', $account->street)
+			->where('brgy', $account->brgy)
+			->where('city_id', $account->city_id)
+			->where('approved', 1)
+			->first();
+	}
+
+	public static function myAccountsForApproval($user_id,$filter){
 		return DB::table('new_accounts')
 			->select('new_accounts.*','account_types.account_type','cities.city','provinces.province')
 			->join('account_types', 'account_types.id', '=', 'new_accounts.account_type_id')
 			->join('cities', 'cities.id', '=', 'new_accounts.city_id')
 			->join('provinces', 'provinces.id', '=', 'cities.province_id')
 			->where('approved', 0)
-			->where('created_by', $id)
+			->where('created_by', $user_id)
+			->where('new_accounts.account_name', 'LIKE' ,"%$filter%")
 			->get();
 	}
 

@@ -50,22 +50,25 @@ class UsersController extends Controller
 
 		if($validation->passes())
 		{
-			$user = new User;
-			$user->first_name = strtoupper(Input::get('first_name'));
-			$user->last_name = strtoupper(Input::get('last_name'));
-			$user->username = Input::get('username');
-			$user->email = Input::get('email');
-			$user->password = Input::get('password');
-			$user->confirmation_code = md5(uniqid(mt_rand(), true));
-			$user->confirmed = 1;
-			$user->active = 1;
-			$user->department_id = Input::get('department_id');
-			$user->save();
+			DB::transaction(function()
+			{
+				$user = new User;
+				$user->first_name = strtoupper(Input::get('first_name'));
+				$user->last_name = strtoupper(Input::get('last_name'));
+				$user->username = Input::get('username');
+				$user->email = Input::get('email');
+				$user->password = Input::get('password');
+				$user->password_confirmation = Input::get('password_confirmation');
+				$user->confirmation_code = md5(uniqid(mt_rand(), true));
+				$user->confirmed = 1;
+				$user->active = 1;
+				$user->department_id = Input::get('department_id');
+				$user->save()
 
-			$role = Role::find(Input::get('role_id'));
+				$role = Role::find(Input::get('role_id'));
 
-			$user->roles()->attach($role->id); // id only
-
+				$user->roles()->attach($role->id); // id only
+			});
 			return Redirect::route('user.index')
 				->with('class', 'alert-success')
 				->with('message', 'Record successfuly created.');

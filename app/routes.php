@@ -30,13 +30,13 @@ Route::group(array('before' => 'auth'), function()
 	Route::resource('role', 'RoleController');
 	Route::get('role/{id}/manageprivilleges', array('as' => 'role.manageprivilleges', 'uses' => 'RoleController@manageprivilleges'));
 
-	Route::resource('drafted-project', 'DraftedProjectController');
+	Route::resource('project', 'NewProjectController');
 
-	Route::resource('new-account', 'NewAccountController');
+	Route::resource('account', 'NewAccountController');
 
 	Route::resource('account-approval', 'AccountApprovalController');
 
-	Route::resource('account', 'AccountController');
+	Route::resource('account-group', 'AccountGroupController');
 });
 // Confide routes
 // Route::get('users', 'UsersController@index');

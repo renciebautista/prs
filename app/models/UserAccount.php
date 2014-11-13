@@ -3,13 +3,14 @@
 class UserAccount extends \Eloquent {
 	protected $fillable = [];
 
-	public static function myAccounts($id){
+	public static function myAccounts($user_id,$filter){
 		return DB::table('user_accounts')
 			->select('new_accounts.*','cities.city','provinces.province')
 			->join('new_accounts', 'new_accounts.id', '=', 'user_accounts.account_id')
 			->join('cities', 'cities.id', '=', 'new_accounts.city_id')
 			->join('provinces', 'provinces.id', '=', 'cities.province_id')
-			->where('user_id', $id)
+			->where('user_id', $user_id)
+			->where('new_accounts.account_name', 'LIKE' ,"%$filter%")
 			->get();
 	}
 

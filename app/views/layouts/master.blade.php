@@ -54,6 +54,7 @@
 							<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">File Maintenance <span class="caret"></span></a>
 							<ul class="dropdown-menu" aria-labelledby="themes">
 								<li>{{ HTML::linkRoute('account-type.index', 'Account Type') }}</li>
+								<li>{{ HTML::linkRoute('account-group.index', 'Account Group') }}</li>
 							</ul>
 						</li>
 						@endif
@@ -61,14 +62,14 @@
 							<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Projects <span class="caret"></span></a>
 							<ul class="dropdown-menu" aria-labelledby="download">
 								<li><a href="./sales/create">Public Projects</a></li>
-								<li>{{ HTML::linkRoute('drafted-project.index', 'Drafted Projects') }}</li>
+								<li>{{ HTML::linkRoute('project.index', 'Drafted Projects') }}</li>
 								<li><a href="./bootstrap.css">Assigned Projects</a></li>
 							</ul>
 						</li>
 						<li class="dropdown">
 							<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Contacts <span class="caret"></span></a>
 							<ul class="dropdown-menu" aria-labelledby="download">
-								<li>{{ HTML::linkRoute('new-account.index', 'New Contact') }}</li>
+								<li>{{ HTML::linkRoute('account.index', 'New Contact') }}</li>
 								<li><a href="./bootstrap.css">My Contacts</a></li>
 								<li>{{ HTML::linkRoute('account-approval.index', 'Contact Approval') }}</li>
 							</ul>
@@ -77,8 +78,7 @@
 						<li class="dropdown">
 							<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Accounts <span class="caret"></span></a>
 							<ul class="dropdown-menu" aria-labelledby="download">
-								<li>{{ HTML::linkRoute('new-account.index', 'New Accounts') }}</li>
-								<li>{{ HTML::linkRoute('account.index', 'My Accounts') }}</li>
+								<li>{{ HTML::linkRoute('account.index', 'Accounts') }}</li>
 								<li>{{ HTML::linkRoute('account-approval.index', 'Account Approval') }}</li>
 							</ul>
 						</li>
@@ -95,7 +95,19 @@
 						
 					</ul>
 
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">{{ Auth::user()->getFullname() }} <span class="caret"></span></a>
+							<ul class="dropdown-menu" aria-labelledby="download">
+								<li><a href="./sales/create">Profile</a></li>
+								<li>{{ HTML::link('/logout', 'Logout') }}</li>
+							</ul>
+						</li>
+					</ul>
+
 				</div>
+
+
 			</div>
 		</div>
 
@@ -107,7 +119,9 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<h1>{{ $pagetitle }}</h1>
+
 					</div>
+
 				</div>
 			</div>
 			@endif

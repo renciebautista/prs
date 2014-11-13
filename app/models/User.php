@@ -15,9 +15,10 @@ class User extends Eloquent implements ConfideUserInterface {
 		'role_id' => 'required',
 		'username' => 'required|unique:users',
 		'email' => 'required|email|unique:users',
-		'password' => 'required|min:6||confirmed',
+		'password' => 'required|min:6|confirmed',
 		'password_confirmation' => 'same:password',
 	);
+
 
 	public function roles()
 	{
