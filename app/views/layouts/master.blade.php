@@ -8,6 +8,7 @@
 		{{ HTML::style('assets/plugins/twitter-bootstrap/css/bootstrap.css') }}
 		{{ HTML::style('assets/plugins/twitter-bootstrap/css/bootswatch.min.css') }}
 		{{ HTML::style('assets/plugins/font-awesome-4.2.0/css/font-awesome.min.css') }}
+		{{ HTML::style('assets/plugins/colorbox/css/colorbox.css') }}
 		{{ HTML::style('assets/css/style.css') }}
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
@@ -64,20 +65,12 @@
 								<li><a href="./bootstrap.css">Assigned Projects</a></li>
 							</ul>
 						</li>
-						<li class="dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Contacts <span class="caret"></span></a>
-							<ul class="dropdown-menu" aria-labelledby="download">
-								<li>{{ HTML::linkRoute('account.index', 'New Contact') }}</li>
-								<li><a href="./bootstrap.css">My Contacts</a></li>
-								<li>{{ HTML::linkRoute('account-approval.index', 'Contact Approval') }}</li>
-							</ul>
-						</li>
 
 						<li class="dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Accounts <span class="caret"></span></a>
-							<ul class="dropdown-menu" aria-labelledby="download">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Account Directory<span class="caret"></span></a>
+							<ul class="dropdown-menu" aria-labelledby="themes">
 								<li>{{ HTML::linkRoute('account.index', 'Accounts') }}</li>
-								<li>{{ HTML::linkRoute('account-approval.index', 'Account Approval') }}</li>
+								<li>{{ HTML::linkRoute('contact.index', 'Contacts') }}</li>
 							</ul>
 						</li>
 						<li class="dropdown">
@@ -153,6 +146,14 @@
 
 		{{ HTML::script('assets/js/jquery-1.11.1.min.js') }}
 		{{ HTML::script('assets/plugins/twitter-bootstrap/js/bootstrap.min.js') }}
+		{{ HTML::script('assets/plugins/colorbox/js/jquery.colorbox-min.js') }}
 		<!-- {{ HTML::script('assets/plugins/twitter-bootstrap/js/bootswatch.js') }} -->
+		<script type="text/javascript">
+		$(document).ready(function() {
+		@section('page-script')
+
+        @show
+        });
+        </script>
 	</body>
 </html>

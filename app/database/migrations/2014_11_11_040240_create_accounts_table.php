@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateNewAccountsTable extends Migration {
+class CreateAccountsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,7 +12,7 @@ class CreateNewAccountsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('new_accounts', function($table){
+		Schema::create('accounts', function($table){
 			$table->increments('id');
 			$table->integer('created_by')->unsigned();
 			$table->foreign('created_by')->references('id')->on('users');
@@ -33,11 +33,11 @@ class CreateNewAccountsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('new_accounts', function (Blueprint $table) {
-			$table->dropForeign('new_accounts_created_by_foreign');
-			$table->dropForeign('new_accounts_account_type_id_foreign');
+		Schema::table('accounts', function ($table) {
+			$table->dropForeign('accounts_created_by_foreign');
+			$table->dropForeign('accounts_account_type_id_foreign');
 		});
-		Schema::drop('new_accounts');
+		Schema::drop('accounts');
 	}
 
 }

@@ -1,6 +1,6 @@
 <?php
 
-class NewAccount extends Eloquent {
+class Account extends Eloquent {
 	protected $fillable = [];
 
 	public static $rules = array(
@@ -10,10 +10,10 @@ class NewAccount extends Eloquent {
 	);
 
 	public static function accountExist($account){
-		return DB::table('new_accounts')
-			->select('new_accounts.*','cities.city','provinces.province','account_types.account_type')
-			->join('account_types', 'account_types.id', '=', 'new_accounts.account_type_id')
-			->join('cities', 'cities.id', '=', 'new_accounts.city_id')
+		return DB::table('accounts')
+			->select('accounts.*','cities.city','provinces.province','account_types.account_type')
+			->join('account_types', 'account_types.id', '=', 'accounts.account_type_id')
+			->join('cities', 'cities.id', '=', 'accounts.city_id')
 			->join('provinces', 'provinces.id', '=', 'cities.province_id')
 			->where('account_name', $account->account_name)
 			->where('lot', $account->lot)
@@ -25,23 +25,23 @@ class NewAccount extends Eloquent {
 	}
 
 	public static function myAccountsForApproval($user_id,$filter){
-		return DB::table('new_accounts')
-			->select('new_accounts.*','account_types.account_type','cities.city','provinces.province')
-			->join('account_types', 'account_types.id', '=', 'new_accounts.account_type_id')
-			->join('cities', 'cities.id', '=', 'new_accounts.city_id')
+		return DB::table('accounts')
+			->select('accounts.*','account_types.account_type','cities.city','provinces.province')
+			->join('account_types', 'account_types.id', '=', 'accounts.account_type_id')
+			->join('cities', 'cities.id', '=', 'accounts.city_id')
 			->join('provinces', 'provinces.id', '=', 'cities.province_id')
 			->where('approved', 0)
 			->where('created_by', $user_id)
-			->where('new_accounts.account_name', 'LIKE' ,"%$filter%")
+			->where('accounts.account_name', 'LIKE' ,"%$filter%")
 			->get();
 	}
 
 	public static function get_for_approval()
 	{
-		return DB::table('new_accounts')
-			->select('new_accounts.*','account_types.account_type','cities.city','provinces.province')
-			->join('account_types', 'account_types.id', '=', 'new_accounts.account_type_id')
-			->join('cities', 'cities.id', '=', 'new_accounts.city_id')
+		return DB::table('accounts')
+			->select('accounts.*','account_types.account_type','cities.city','provinces.province')
+			->join('account_types', 'account_types.id', '=', 'accounts.account_type_id')
+			->join('cities', 'cities.id', '=', 'accounts.city_id')
 			->join('provinces', 'provinces.id', '=', 'cities.province_id')
 			->where('approved', 0)
 			->get();
@@ -49,12 +49,12 @@ class NewAccount extends Eloquent {
 
 	public static function get_for_approval_by_id($id)
 	{
-		return DB::table('new_accounts')
-			->select('new_accounts.*','account_types.account_type','cities.city','provinces.province')
-			->join('account_types', 'account_types.id', '=', 'new_accounts.account_type_id')
-			->join('cities', 'cities.id', '=', 'new_accounts.city_id')
+		return DB::table('accounts')
+			->select('accounts.*','account_types.account_type','cities.city','provinces.province')
+			->join('account_types', 'account_types.id', '=', 'accounts.account_type_id')
+			->join('cities', 'cities.id', '=', 'accounts.city_id')
 			->join('provinces', 'provinces.id', '=', 'cities.province_id')
-			->where('new_accounts.id', $id)
+			->where('accounts.id', $id)
 			->where('approved', 0)
 			->first();
 	}
@@ -62,10 +62,10 @@ class NewAccount extends Eloquent {
 	public static function get_approved($newaccount)
 	{
 		
-		return DB::table('new_accounts')
-			->select('new_accounts.*','account_types.account_type','cities.city','provinces.province')
-			->join('account_types', 'account_types.id', '=', 'new_accounts.account_type_id')
-			->join('cities', 'cities.id', '=', 'new_accounts.city_id')
+		return DB::table('accounts')
+			->select('accounts.*','account_types.account_type','cities.city','provinces.province')
+			->join('account_types', 'account_types.id', '=', 'accounts.account_type_id')
+			->join('cities', 'cities.id', '=', 'accounts.city_id')
 			->join('provinces', 'provinces.id', '=', 'cities.province_id')
 			->where('approved', 1)
 			->where('same_as', 0)

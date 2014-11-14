@@ -25,10 +25,7 @@ class CreateStatesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::create('states', function($table){
-			$table->increments('id');
-			$table->string('state');
-		});
+		Schema::drop('states');
 	}
 
 }

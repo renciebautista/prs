@@ -44,42 +44,42 @@
 		</div>
 	</div>
 </div>
+
 <div class="row">
-	<div class="col-lg-6">
-	</div>
-	<div class="col-lg-6">
-	@foreach($accountgroups as $group)
-	<div class="row">
-		<div class="col-lg-12">
-			<div class="panel panel-primary">
-			  	<div class="panel-heading">
-					<h3 class="panel-title">{{ ucwords(strtolower($group->account_group)) }}</h3>
-			  	</div>
-			  	<div class="panel-body">
-					<div class="table-responsive">
-						<div class="pull-right">
-							<a class="btn btn-success btn-xs" href="#"><i class="fa fa-plus"></i> Account</a>
-						</div>
-						
-						<table class="table table-striped table-hover">
-							<thead>
-								<tr>
-									<th>Account Name</th>
-									<th>Address</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td colspan="2">No record found!</td>
-								</tr>
-							</tbody>
-						</table> 
+	<div class="col-lg-12">
+		<div class="panel panel-primary">
+		  	<div class="panel-heading">
+				<h3 class="panel-title">Contacts</h3>
+		  	</div>
+		  	<div class="panel-body">
+				<div class="table-responsive">
+					<div class="pull-left">
+						<a id="add-contact" class="btn btn-success btn-xs iframe" target="_blank" href=""><i class="fa fa-plus"></i> Contact</a>
 					</div>
-			  	</div>
-			</div>
+					
+					<table class="table table-striped table-hover">
+						<thead>
+							<tr>
+								<th>Account Name</th>
+								<th>Account Group</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td colspan="2">No record found!</td>
+							</tr>
+						</tbody>
+					</table> 
+				</div>
+		  	</div>
 		</div>
 	</div>
-	@endforeach
-	</div>
 </div>
+
+
+@stop
+
+@section('page-script')
+	$(".iframe").colorbox({iframe:true, width:"80%", height:"80%",overlayClose:false});
+	$('#add-contact').attr("href", "{{ URL::to('project/contacts'); }}");
 @stop

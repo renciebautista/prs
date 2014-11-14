@@ -1,6 +1,6 @@
 <?php
 
-class NewProjectController extends \BaseController {
+class DraftedProjectController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.
@@ -48,9 +48,9 @@ class NewProjectController extends \BaseController {
 			$project = new Project;
 			$project->created_by = Auth::id();
 			$project->project_name =  strtoupper(Input::get('project_name'));
-			$project->lot = Input::get('lot');
-			$project->street = Input::get('street');
-			$project->brgy = Input::get('brgy');
+			$project->lot = strtoupper(Input::get('lot'));
+			$project->street = strtoupper(Input::get('street'));
+			$project->brgy = strtoupper(Input::get('brgy'));
 			$project->city_id = Input::get('city_id');
 			$project->state_id = 1;
 			$project->save();
@@ -124,6 +124,12 @@ class NewProjectController extends \BaseController {
 	public function destroy($id)
 	{
 		//
+	}
+
+	public function contacts(){
+		$pagetitle = 'Contact Lists';
+		$contacts = array();
+		return View::make('draftedproject.contacts',compact('pagetitle', 'contacts'));
 	}
 
 }
