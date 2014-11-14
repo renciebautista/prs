@@ -125,11 +125,4 @@ class DraftedProjectController extends \BaseController {
 	{
 		//
 	}
-
-	public function contacts(){
-		$pagetitle = 'Contact Lists';
-		$contacts = array();
-		return View::make('draftedproject.contacts',compact('pagetitle', 'contacts'));
-	}
-
 }

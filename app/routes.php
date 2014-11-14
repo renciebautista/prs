@@ -30,9 +30,11 @@ Route::group(array('before' => 'auth'), function()
 	Route::resource('role', 'RoleController');
 	Route::get('role/{id}/manageprivilleges', array('as' => 'role.manageprivilleges', 'uses' => 'RoleController@manageprivilleges'));
 
-	Route::resource('contact', 'ContactController');
+	
 
-	Route::get('project/contacts', 'DraftedProjectController@contacts');
+	Route::get('contact/lists', 'ContactController@lists');
+	Route::resource('contact', 'ContactController');
+	
 	Route::resource('project', 'DraftedProjectController');
 	
 

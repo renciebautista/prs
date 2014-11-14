@@ -11,7 +11,7 @@ class ContactController extends \BaseController {
 	public function index()
 	{
 		$pagetitle = 'Contact Lists';
-		$contacts = Contact::all();
+		$contacts = Contact::myContacts(Auth::id(),Input::get('s'));
 		return View::make('contact.index',compact('pagetitle', 'contacts'));
 	}
 
@@ -48,8 +48,19 @@ class ContactController extends \BaseController {
 			$contact->first_name = strtoupper(Input::get('first_name'));
 			$contact->middle_name = strtoupper(Input::get('middle_name'));
 			$contact->last_name = strtoupper(Input::get('last_name'));
-			$contact->save();
+			if(Input::get('account_id') != 'default'){
+				$contact->account_id = Input::get('account_id');
+			}
+			
 
+			if(Contact::contactExist($contact)){
+				return Redirect::route('contact.create')
+					->withInput()
+					->withErrors($validation)
+					->with('class', 'alert-warning')
+					->with('message', 'Contact information already exist.');
+			}
+			$contact->save();
 			return Redirect::route('contact.index')
 				->with('class', 'alert-success')
 				->with('message', 'Contact successfuly created.');
@@ -109,5 +120,12 @@ class ContactController extends \BaseController {
 	{
 		//
 	}
+
+	public function lists(){
+		$pagetitle = 'Contact Lists';
+		$contacts = Contact::myContacts(Auth::id(),Input::get('s'));
+		return View::make('contact.lists',compact('pagetitle', 'contacts'));
+	}
+
 
 }

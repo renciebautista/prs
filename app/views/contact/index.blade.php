@@ -34,8 +34,8 @@
 					@else
 					@foreach($contacts as $contact)
 					<tr>
-						<td>{{ $contact->contact_name }}</td>
-						<td>{{ AccountHelper::address($contact) }}</td>
+						<td>{{ ContactHelper::fullname($contact) }}</td>
+						<td>{{ $contact->account_name }}</td>
 						<td class="action">
 							{{ HTML::linkRoute('contact.edit','Edit', $contact->id, array('class' => 'btn btn-info btn-xs')) }}
 						</td>

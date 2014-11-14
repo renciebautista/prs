@@ -9,6 +9,6 @@ class AccountHelper {
     	if((!empty($account->lot)) || (!empty($account->street)) || (!empty($account->brgy))){
     		$comma = ', ';
     	}
-        return ucwords(strtolower($account->lot .' '.$account->street .' '. $account->brgy.$comma.$account->city.' - '.$account->province));
+    	return ucwords(strtolower($account->lot .' '.$account->street .' '. $account->brgy.$comma.$account->city.' - '.$account->province));
     }
 }

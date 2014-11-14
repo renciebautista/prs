@@ -81,5 +81,5 @@
 
 @section('page-script')
 	$(".iframe").colorbox({iframe:true, width:"80%", height:"80%",overlayClose:false});
-	$('#add-contact').attr("href", "{{ URL::to('project/contacts'); }}");
+	$('#add-contact').attr("href", "{{ URL::to('contact/lists'); }}");
 @stop
