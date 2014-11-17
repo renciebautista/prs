@@ -148,6 +148,7 @@
 		{{ HTML::script('assets/plugins/twitter-bootstrap/js/bootstrap.min.js') }}
 		{{ HTML::script('assets/plugins/colorbox/js/jquery.colorbox-min.js') }}
 		<!-- {{ HTML::script('assets/plugins/twitter-bootstrap/js/bootswatch.js') }} -->
+		{{ HTML::script('assets/js/app.js') }}
 		<script type="text/javascript">
 		$(document).ready(function() {
 		@section('page-script')

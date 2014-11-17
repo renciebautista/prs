@@ -52,10 +52,23 @@
 				<h3 class="panel-title">Contacts</h3>
 		  	</div>
 		  	<div class="panel-body">
-				<div class="table-responsive">
-					<div class="pull-left">
-						<a id="add-contact" class="btn btn-success btn-xs iframe" target="_blank" href=""><i class="fa fa-plus"></i> Contact</a>
+		  		<div>
+					<div class="btn-group">
+						<a class="btn btn-success btn-xs dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+							<i class="fa fa-plus"></i> Contact</a>
+						</a>
+						<ul class="dropdown-menu">
+							@foreach($accountgroups as $accountgroup)
+							<li>
+								<a class="account_group iframe" target="_blank"  href="#">{{ $accountgroup->account_group }}</a>
+							</li>
+							@endforeach
+						</ul>
 					</div>
+					
+				</div>
+				<div class="table-responsive">
+					
 					
 					<table class="table table-striped table-hover">
 						<thead>
@@ -81,5 +94,5 @@
 
 @section('page-script')
 	$(".iframe").colorbox({iframe:true, width:"80%", height:"80%",overlayClose:false});
-	$('#add-contact').attr("href", "{{ URL::to('contact/lists'); }}");
+	$('.account_group').attr("href", "{{ URL::to('contact/lists'); }}");
 @stop

@@ -30,7 +30,6 @@ Route::group(array('before' => 'auth'), function()
 	Route::resource('role', 'RoleController');
 	Route::get('role/{id}/manageprivilleges', array('as' => 'role.manageprivilleges', 'uses' => 'RoleController@manageprivilleges'));
 
-	
 
 	Route::get('contact/lists', 'ContactController@lists');
 	Route::resource('contact', 'ContactController');
@@ -41,6 +40,8 @@ Route::group(array('before' => 'auth'), function()
 	Route::resource('account', 'AccountController');
 
 	Route::resource('account-group', 'AccountGroupController');
+
+	Route::get('api/contact/search', 'api\ContactSearchController@index');
 });
 // Confide routes
 // Route::get('users', 'UsersController@index');

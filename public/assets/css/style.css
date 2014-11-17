@@ -7,3 +7,5 @@
 .form-inline .form-group input {
     min-width:350px;
 }
+
+$('#test').css('textTransform', 'capitalize');
