@@ -121,10 +121,19 @@ class ContactController extends \BaseController {
 		//
 	}
 
-	public function lists(){
-		$pagetitle = 'Contact Lists';
+	public function lists($project_id = null, $group_id = null){
+		$account = AccountGroup::find($group_id);
+		if ((is_null($account)) ||(is_null($project_id)))
+		{
+			return Redirect::route('project.index')
+				->with('class', 'alert-danger')
+				->with('message', 'Project does not exist.');
+		}
+		$pagetitle = "Add contact in '" . ucwords(strtolower($account->account_group))."' group";
+		$project_id = $project_id;
+		$group_id = $group_id;
 		$contacts = Contact::myContacts(Auth::id(),Input::get('s'));
-		return View::make('contact.lists',compact('pagetitle', 'contacts'));
+		return View::make('contact.lists',compact('pagetitle', 'contacts', 'project_id', 'group_id'));
 	}
 
 

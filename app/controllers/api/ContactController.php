@@ -1,7 +1,7 @@
 <?php
 namespace Api;
 
-class ContactSearchController extends \BaseController {
+class ContactController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.
@@ -13,12 +13,15 @@ class ContactSearchController extends \BaseController {
 	{
 		if(\Request::ajax()){
 			$contacts = \Contact::myContacts(\Auth::id(),\Input::get('search'));
-			return \Response::json(array(
-				'error' => false,
-				'contacts' => $contacts),
-				200
-			);
-		}
+			$project = \Input::get('project');
+			$group = \Input::get('group');
+			return \View::make('api.contactlist', compact('contacts', 'project', 'group'));
+			// return \Response::json(array(
+			// 	'error' => false,
+			// 	'contacts' => $contacts),
+			// 	200
+			// );
+		}			
 	}
 
 	/**

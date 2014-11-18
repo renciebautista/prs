@@ -111,7 +111,50 @@ class DraftedProjectController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		DB::transaction(function($id) use ($id)
+		{
+			$project = Project::where('id',$id)
+				->where('state_id',1)
+				->first();
+			
+			if (is_null($project))
+			{
+				return Redirect::route('project.index')
+					->with('class', 'alert-danger')
+					->with('message', 'Project does not exist.');
+			}
+
+			if(Input::has('update')){
+				Input::merge(array_map('trim', Input::all()));
+				$input = Input::all();
+
+				$validation = Validator::make($input, Project::$rules);
+
+				if($validation->passes())
+				{
+					$project->project_name =  strtoupper(Input::get('project_name'));
+					$project->lot = strtoupper(Input::get('lot'));
+					$project->street = strtoupper(Input::get('street'));
+					$project->brgy = strtoupper(Input::get('brgy'));
+					$project->city_id = Input::get('city_id');
+					$project->save();
+
+					return Redirect::route('project.edit',$project->id)
+						->with('class', 'alert-success')
+						->with('message', 'Project successfuly created.');
+					
+				}
+
+				return Redirect::route('project.edit1',$project->id)
+					->withErrors($validation)
+					->with('class', 'alert-danger')
+					->with('message', 'There were validation errors.');
+
+			}else{
+				
+			}
+
+		});
 	}
 
 	/**

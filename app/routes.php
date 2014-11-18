@@ -30,18 +30,21 @@ Route::group(array('before' => 'auth'), function()
 	Route::resource('role', 'RoleController');
 	Route::get('role/{id}/manageprivilleges', array('as' => 'role.manageprivilleges', 'uses' => 'RoleController@manageprivilleges'));
 
+	Route::get('contact/lists/', 'ContactController@lists');
+	Route::get('contact/lists/{project_id}/{group_id}', 'ContactController@lists');
 
-	Route::get('contact/lists', 'ContactController@lists');
 	Route::resource('contact', 'ContactController');
 	
 	Route::resource('project', 'DraftedProjectController');
-	
 
 	Route::resource('account', 'AccountController');
 
 	Route::resource('account-group', 'AccountGroupController');
 
-	Route::get('api/contact/search', 'api\ContactSearchController@index');
+	Route::get('api/contact/search', 'api\ContactController@index');
+	Route::post('api/project/addcontact', 'api\ProjectController@create');
+
+	Route::get('api/project/contacts/{id}', 'api\ProjectContactController@show');
 });
 // Confide routes
 // Route::get('users', 'UsersController@index');

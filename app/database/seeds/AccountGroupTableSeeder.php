@@ -11,13 +11,12 @@ class AccountGroupTableSeeder extends Seeder {
 
 		DB::statement("INSERT INTO account_groups (id, account_group) VALUES
 			(1, 'PROJECT OWNER'),
-			(2, 'GENERAL CONTRACTOR'),
-			(3, 'APPLICATOR'),
-			(4, 'ARCHITECT'),
-			(5, 'DEVELOPER'),
-			(6, 'PROJECT DESIGNER'),
-			(7, 'PROJECT MANAGER'),
-			(8, 'DEALER / SUPPLIER');");
+			(2, 'DEVELOPER'),
+			(3, 'GENERAL CONTRACTOR'),
+			(4, 'PROJECT MANAGER / DESIGNER'),
+			(5, 'ARCHITECT'),
+			(6, 'APPLICATOR'),
+			(7, 'DEALER / SUPPLIER');");
 	}
 
 }

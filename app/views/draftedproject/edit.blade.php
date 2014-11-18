@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="row">
-
+	{{ Form::open(array('route' => array('project.update', $project->id), 'method' => 'PUT', 'class' => 'bs-component')) }}
 	<div class="col-lg-12">
 		<div class="form-group">
 			<div class="row">
@@ -42,7 +42,13 @@
 				</div>
 			</div>
 		</div>
+		<div class="form-group">
+			<input class="btn btn-primary" type="submit" name="update" id="update" value="Update">
+			<input class="btn btn-warning" type="submit" name="post" id="post" value="Post">
+			{{ HTML::linkRoute('project.index', 'Back', array(), array('class' => 'btn btn-default')) }}
+		</div>
 	</div>
+	{{ Form::close() }}
 </div>
 
 <div class="row">
@@ -53,36 +59,22 @@
 		  	</div>
 		  	<div class="panel-body">
 		  		<div>
-					<div class="btn-group">
+					<div class="btn-group dropup">
 						<a class="btn btn-success btn-xs dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
 							<i class="fa fa-plus"></i> Contact</a>
 						</a>
 						<ul class="dropdown-menu">
 							@foreach($accountgroups as $accountgroup)
 							<li>
-								<a class="account_group iframe" target="_blank"  href="#">{{ $accountgroup->account_group }}</a>
+								<a class="account_group iframe" target="_blank" id="{{ $accountgroup->id }}"  href="#">{{ $accountgroup->account_group }}</a>
 							</li>
 							@endforeach
 						</ul>
 					</div>
 					
 				</div>
-				<div class="table-responsive">
+				<div id="results" class="table-responsive">
 					
-					
-					<table class="table table-striped table-hover">
-						<thead>
-							<tr>
-								<th>Account Name</th>
-								<th>Account Group</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td colspan="2">No record found!</td>
-							</tr>
-						</tbody>
-					</table> 
 				</div>
 		  	</div>
 		</div>
@@ -93,6 +85,25 @@
 @stop
 
 @section('page-script')
-	$(".iframe").colorbox({iframe:true, width:"80%", height:"80%",overlayClose:false});
-	$('.account_group').attr("href", "{{ URL::to('contact/lists'); }}");
+	$(".iframe").colorbox({
+		iframe:true, 
+		width:"80%", 
+		height:"90%",
+		overlayClose:false,
+		onClosed:function(){ update_contact(); }
+	});
+
+	$('.account_group').click(function(){
+		var url = "{{ URL::to('contact/lists',array('project_id' => $project->id)) }}/"+$(this).attr('id');
+		$('.account_group').attr("href", url);
+	});
+
+	function update_contact(){
+		$.get("{{ URL::to('api/project/contacts',$project->id) }}", function(response){
+			$('#results').fadeIn();
+			$('#results').html(response);
+		});
+	}
+	
+	update_contact();
 @stop
