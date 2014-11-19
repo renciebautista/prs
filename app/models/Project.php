@@ -48,8 +48,11 @@ class Project extends \Eloquent {
 	public static function approved($project)
 	{
 		return DB::table('projects')
-			->select('projects.*')
-			->where('state_id', 3)
+			->select('projects.*','cities.city','provinces.province', 'users.first_name', 'users.middle_name','users.last_name')
+			->join('cities', 'cities.id', '=', 'projects.city_id')
+			->join('provinces', 'provinces.id', '=', 'cities.province_id')
+			->join('users', 'users.id', '=', 'projects.assigned_to')
+			->where('projects.state_id', 3)
 			->where(function($query) use ($project){
 				$name_keys = explode(" ",$project->project_name);
 				$lot_keys = explode(" ",$project->lot);

@@ -109,12 +109,12 @@
 		  	</div>
 		  	<div class="panel-body">
 				<div class="table-responsive">
-					<table class="table table-striped table-hover">
+					<table id="similar" class="table table-striped table-hover">
 						<thead>
 							<tr>
 								<th>Project Name</th>
 								<th>Address</th>
-								<th>Assigned</th>
+								<th>Assigned To</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -126,8 +126,8 @@
 							@foreach($approved_projects as $approved_project)
 							<tr>
 								<td>{{ $approved_project->project_name }}</td>
-								<td></td>
-								<td></td>
+								<td>{{ AccountHelper::address($approved_project) }}</td>
+								<td>{{ UserHelper::fullname($approved_project) }}</td>
 							</tr>
 							@endforeach
 							@endif
@@ -142,5 +142,6 @@
 @stop
 
 @section('page-script')
-	
+	var searchTerms = [$('#project_name').val(), $('#lot').val(), $('#street').val(), $('#brgy').val(),$('#city_id').val().replace("-", "")];
+	$("#similar tbody").highlightTermsIn(searchTerms); 
 @stop
