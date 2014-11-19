@@ -34,6 +34,8 @@ Route::group(array('before' => 'auth'), function()
 	Route::get('contact/lists/{project_id}/{group_id}', 'ContactController@lists');
 
 	Route::resource('contact', 'ContactController');
+
+	Route::resource('projectapproval', 'ProjectApprovalController');
 	
 	Route::resource('project', 'DraftedProjectController');
 
@@ -43,7 +45,6 @@ Route::group(array('before' => 'auth'), function()
 
 	Route::get('api/contact/search', 'api\ContactController@index');
 	Route::post('api/project/addcontact', 'api\ProjectController@create');
-
 	Route::get('api/project/contacts/{id}', 'api\ProjectContactController@show');
 });
 // Confide routes

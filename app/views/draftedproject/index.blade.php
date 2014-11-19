@@ -13,7 +13,10 @@
 			  		<input type="radio" name="status" value="2" {{ Helper::oldRadio('status', '2') }}> For Approval
 				</label>
 				<label class="radio-inline">
-			  		<input type="radio" name="status" value="0" {{ Helper::oldRadio('status', '0') }} > Approved / Denied
+			  		<input type="radio" name="status" value="3" {{ Helper::oldRadio('status', '3') }} > Approved
+				</label>
+				<label class="radio-inline">
+			  		<input type="radio" name="status" value="4" {{ Helper::oldRadio('status', '4') }} > Denied
 				</label>
 			</div>
 		 	<div class="form-group">
@@ -47,6 +50,7 @@
 					<tr>
 						<td>{{ $project->project_name }}</td>
 						<td>{{ AccountHelper::address($project) }}</td>
+						@if($project->state_id < 3)
 						<td class="action">
 							{{ HTML::linkRoute('project.edit','Edit', $project->id, array('class' => 'btn btn-info btn-xs')) }}
 						</td>
@@ -55,6 +59,11 @@
 							{{ Form::submit('Delete', array('class'=> 'btn btn-danger btn-xs','onclick' => "if(!confirm('Are you sure to delete this record?')){return false;};")) }}
 							{{ Form::close() }}
 						</td>
+						@else
+						<td class="action">
+							{{ HTML::linkRoute('project.show','View', $project->id, array('class' => 'btn btn-info btn-xs')) }}
+						</td>
+						@endif
 					</tr>
 					@endforeach
 					@endif

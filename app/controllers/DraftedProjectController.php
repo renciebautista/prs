@@ -2,6 +2,13 @@
 
 class DraftedProjectController extends \BaseController {
 
+	private function allowEdit($id){
+		return Project::where('id',$id)
+			->where('state_id','<', 3)
+			->where('created_by', Auth::id())
+			->first();
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 * GET /newproject
@@ -87,16 +94,18 @@ class DraftedProjectController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$pagetitle = 'Update Project';
-		$project = Project::details($id);
-		if (is_null($project))
+		
+		$prj = $this->allowEdit($id);
+		
+		if (is_null($prj))
 		{
 			return Redirect::route('project.index')
 				->with('class', 'alert-danger')
-				->with('message', 'Record does not exist.');
+				->with('message', 'Project does not exist.');
 		}
+		$pagetitle = 'Update Project';
 		$cities = City::get_all();
-
+		$project = Project::details($id);
 		$accountgroups = AccountGroup::all();
 
 		return View::make('draftedproject.edit', compact('pagetitle', 'project', 'cities', 'accountgroups'));
@@ -111,50 +120,44 @@ class DraftedProjectController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		DB::transaction(function($id) use ($id)
+		$prj = $this->allowEdit($id);
+		
+		if (is_null($prj))
 		{
-			$project = Project::where('id',$id)
-				->where('state_id',1)
-				->first();
+			return Redirect::route('project.index')
+				->with('class', 'alert-danger')
+				->with('message', 'Project does not exist.');
+		}
+
+		Input::merge(array_map('trim', Input::all()));
+		$input = Input::all();
+
+		$validation = Validator::make($input, Project::$rules);
+		if ($validation->passes())
+		{
+			$project = Project::find($id);
 			
-			if (is_null($project))
-			{
-				return Redirect::route('project.index')
-					->with('class', 'alert-danger')
-					->with('message', 'Project does not exist.');
+			$project->project_name =  strtoupper(Input::get('project_name'));
+			$project->lot = strtoupper(Input::get('lot'));
+			$project->street = strtoupper(Input::get('street'));
+			$project->brgy = strtoupper(Input::get('brgy'));
+			$project->city_id = Input::get('city_id');
+			if(Input::has('post')){
+				$project->state_id = 2;
+
 			}
+			$project->save();
 
-			if(Input::has('update')){
-				Input::merge(array_map('trim', Input::all()));
-				$input = Input::all();
+			return Redirect::route('project.edit', $id)
+				->with('class', 'alert-success')
+				->with('message', 'Project successfuly updated.');
+		}
 
-				$validation = Validator::make($input, Project::$rules);
-
-				if($validation->passes())
-				{
-					$project->project_name =  strtoupper(Input::get('project_name'));
-					$project->lot = strtoupper(Input::get('lot'));
-					$project->street = strtoupper(Input::get('street'));
-					$project->brgy = strtoupper(Input::get('brgy'));
-					$project->city_id = Input::get('city_id');
-					$project->save();
-
-					return Redirect::route('project.edit',$project->id)
-						->with('class', 'alert-success')
-						->with('message', 'Project successfuly created.');
-					
-				}
-
-				return Redirect::route('project.edit1',$project->id)
-					->withErrors($validation)
-					->with('class', 'alert-danger')
-					->with('message', 'There were validation errors.');
-
-			}else{
-				
-			}
-
-		});
+		return Redirect::route('project.edit', $id)
+			->withInput()
+			->withErrors($validation)
+			->with('class', 'alert-danger')
+			->with('message', 'There were validation errors.');
 	}
 
 	/**
@@ -166,6 +169,22 @@ class DraftedProjectController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$prj = $this->allowEdit($id);
+		
+		if (is_null($prj))
+		{
+			return Redirect::route('project.index')
+				->with('class', 'alert-danger')
+				->with('message', 'Project does not exist.');
+		}
+		DB::transaction(function() use ($id)
+		{
+			$project = Project::find($id);
+			ProjectContact::where('project_id', $project->id)->delete();
+			$project->delete();
+		});
+		return Redirect::route('project.index')
+				->with('class', 'alert-success')
+				->with('message', 'Project successfully deleted.');
 	}
 }

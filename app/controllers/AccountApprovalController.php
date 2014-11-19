@@ -66,7 +66,7 @@ class AccountApprovalController extends \BaseController {
 		{
 			return Redirect::route('account-approval.index')
 				->with('class', 'alert-danger')
-				->with('message', 'Record does not exist.');
+				->with('message', 'Project does not exist.');
 		}
 
 		$approved_accounts = NewAccount::get_approved($newaccount);

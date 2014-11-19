@@ -63,6 +63,8 @@
 								<li><a href="./sales/create">Public Projects</a></li>
 								<li>{{ HTML::linkRoute('project.index', 'Drafted Projects') }}</li>
 								<li><a href="./bootstrap.css">Assigned Projects</a></li>
+								<li class="divider"></li>
+								<li>{{ HTML::linkRoute('projectapproval.index', 'Approve Projects') }}</a></li>
 							</ul>
 						</li>
 

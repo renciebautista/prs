@@ -7,15 +7,18 @@ class UserTableSeeder extends Seeder {
 
 	public function run()
 	{
-
+		DB::table('departments')->truncate();
 	    $department = new Department;
 	    $department->department_desc = 'ADMIN';
 	    $department->save();
 
+	    DB::table('roles')->truncate();
 	    $role = new Role;
 		$role->name = 'ADMINISTRATOR';
 		$role->save();
 
+		DB::table('users')->truncate();
+		DB::table('assigned_roles')->truncate();
 		$user = new User;
 	    $user->username = 'admin';
 	    $user->email = 'admin@prs.com';

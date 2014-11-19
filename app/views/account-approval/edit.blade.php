@@ -41,7 +41,7 @@
 				<div class="col-lg-3">
 					<div class="form-group">
 						{{ Form::label('city_id', 'Town / City', array('class' => 'control-label')) }}
-						{{ Form::text('city_id', $newaccount->city.' - '.$newaccount->province, array('class' => 'form-control', 'placeholder' => 'Project Name', 'disabled' => '')) }}
+						{{ Form::text('city_id', CityHelper::cityProvince($newaccount), array('class' => 'form-control', 'placeholder' => 'Project Name', 'disabled' => '')) }}
 					</div>
 				</div>
 			</div>

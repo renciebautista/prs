@@ -54,6 +54,7 @@ class UsersController extends Controller
 			{
 				$user = new User;
 				$user->first_name = strtoupper(Input::get('first_name'));
+				$user->middle_name = strtoupper(Input::get('middle_name'));
 				$user->last_name = strtoupper(Input::get('last_name'));
 				$user->username = Input::get('username');
 				$user->email = Input::get('email');
@@ -63,7 +64,7 @@ class UsersController extends Controller
 				$user->confirmed = 1;
 				$user->active = 1;
 				$user->department_id = Input::get('department_id');
-				$user->save()
+				$user->save();
 
 				$role = Role::find(Input::get('role_id'));
 

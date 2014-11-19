@@ -12,6 +12,11 @@
 		</div>
 
 		<div class="form-group">
+			{{ Form::label('middle_name', 'Middle Initial', array('class' => 'control-label')) }}
+			{{ Form::text('middle_name','',array('class' => 'form-control', 'placeholder' => 'Middle Initial')) }}
+		</div>
+
+		<div class="form-group">
 			{{ Form::label('last_name', 'Last Name', array('class' => 'control-label')) }}
 			{{ Form::text('last_name','',array('class' => 'form-control', 'placeholder' => 'Last Name')) }}
 		</div>
