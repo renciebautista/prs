@@ -9,6 +9,7 @@
 		{{ HTML::style('assets/plugins/twitter-bootstrap/css/bootswatch.min.css') }}
 		{{ HTML::style('assets/plugins/font-awesome-4.2.0/css/font-awesome.min.css') }}
 		{{ HTML::style('assets/plugins/colorbox/css/colorbox.css') }}
+		<link rel="stylesheet" href="http://openlayers.org/en/v3.0.0/css/ol.css" type="text/css">
 		{{ HTML::style('assets/css/style.css') }}
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
