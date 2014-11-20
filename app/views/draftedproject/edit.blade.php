@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="row">
-	{{ Form::open(array('route' => array('project.update', $project->id), 'method' => 'PUT', 'class' => 'bs-component')) }}
+	{{ Form::open(array('action' => array('DraftedProjectController@update', $project->id), 'method' => 'PUT', 'class' => 'bs-component')) }}
 	<div class="col-lg-12">
 		<div class="form-group">
 			<div class="row">
@@ -45,7 +45,7 @@
 		<div class="form-group">
 			<input class="btn btn-primary" type="submit" name="update" id="update" value="Update">
 			<input class="btn btn-warning" type="submit" name="post" id="post" value="Post">
-			{{ HTML::linkRoute('project.index', 'Back', array(), array('class' => 'btn btn-default')) }}
+			{{ HTML::linkAction('DraftedProjectController@index', 'Back', array(), array('class' => 'btn btn-default')) }}
 		</div>
 	</div>
 	{{ Form::close() }}

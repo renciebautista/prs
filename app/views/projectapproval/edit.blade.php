@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="row">
-	{{ Form::open(array('route' => array('projectapproval.update', $project->id), 'method' => 'PUT', 'class' => 'bs-component')) }}
+	{{ Form::open(array('action' => array('ProjectApprovalController@update', $project->id), 'method' => 'PUT', 'class' => 'bs-component')) }}
 	<div class="col-lg-6">
 		<div class="form-group">
 			<div class="row">
@@ -52,6 +52,14 @@
 				</div>
 			</div>
 		</div>
+		<div class="form-group">
+			<div class="row">
+				<div class="col-lg-12">
+					{{ Form::label('remarks', 'Remarks', array('class' => 'control-label')) }}
+					{{ Form::textarea('remarks',null, array('class' => 'form-control', 'size' => '30x2')) }}
+				</div>
+			</div>
+		</div>
 	</div>
 	
 	<div class="col-lg-6">
@@ -94,7 +102,7 @@
 		<div class="form-group">
 			<input class="btn btn-primary" type="submit" name="assign" id="assign" value="Assign">
 			<input class="btn btn-danger" type="submit" name="deny" id="deny" value="Deny">
-			{{ HTML::linkRoute('projectapproval.index', 'Back', array(), array('class' => 'btn btn-default')) }}
+			{{ HTML::linkAction('ProjectApprovalController@index', 'Back', array(), array('class' => 'btn btn-default')) }}
 		</div>
 	</div>
 	{{ Form::close() }}

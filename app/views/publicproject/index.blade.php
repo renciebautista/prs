@@ -21,7 +21,7 @@
 					<tr>
 						<th>Project Name</th>
 						<th>Address</th>
-						<th>Created By</th>
+						<th>Assigned To</th>
 						<th style="text-align:center;">Action</th>
 					</tr>
 				</thead>
@@ -39,7 +39,7 @@
 						<td>{{ AccountHelper::address($project) }}</td>
 						<td>{{ UserHelper::fullname($project) }}</td>
 						<td class="action">
-							{{ HTML::linkAction('ProjectApprovalController@edit','View', $project->id, array('class' => 'btn btn-info btn-xs')) }}
+							{{ HTML::linkAction('PublicProjectController@edit','Join', $project->id, array('class' => 'btn btn-success btn-xs')) }}
 						</td>
 					</tr>
 					@endforeach

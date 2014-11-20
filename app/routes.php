@@ -35,17 +35,53 @@ Route::group(array('before' => 'auth'), function()
 
 	Route::resource('contact', 'ContactController');
 
-	Route::resource('projectapproval', 'ProjectApprovalController');
-	
-	Route::resource('project', 'DraftedProjectController');
-
 	Route::resource('account', 'AccountController');
 
 	Route::resource('account-group', 'AccountGroupController');
 
-	Route::get('api/contact/search', 'api\ContactController@index');
-	Route::post('api/project/addcontact', 'api\ProjectController@create');
-	Route::get('api/project/contacts/{id}', 'api\ProjectContactController@show');
+	// drafted projects
+	Route::group(array('prefix' => 'drafted'), function()
+	{
+		Route::get('project', 'DraftedProjectController@index');
+		Route::get('project/create', 'DraftedProjectController@create');
+		Route::post('project', 'DraftedProjectController@store');
+		Route::get('project/{id}', 'DraftedProjectController@show');
+		Route::get('project/{id}/edit', 'DraftedProjectController@edit');
+		Route::put('project/{id}', 'DraftedProjectController@update');
+		Route::delete('project/{id}', 'DraftedProjectController@destroy');
+	});
+
+	// approve projects
+	Route::group(array('prefix' => 'approve'), function()
+	{
+		Route::get('project', 'ProjectApprovalController@index');
+		Route::get('project/{id}/edit', 'ProjectApprovalController@edit');
+		Route::put('project/{id}', 'ProjectApprovalController@update');
+	});
+
+	// public projects
+	Route::group(array('prefix' => 'public'), function()
+	{
+		Route::get('project', 'PublicProjectController@index');
+		Route::get('project/{id}/join', 'PublicProjectController@edit');
+	});
+
+	// assigned projects
+	Route::group(array('prefix' => 'assigned'), function()
+	{
+		Route::get('project', 'AssignedProjectController@index');
+	});
+
+
+	// api
+	Route::group(array('prefix' => 'api'), function()
+	{
+		Route::get('contact/search', 'api\ContactController@index');
+		Route::post('project/addcontact', 'api\ProjectController@create');
+		Route::get('project/contacts/{id}', 'api\ProjectContactController@show');
+	});
+
+	
 });
 // Confide routes
 // Route::get('users', 'UsersController@index');

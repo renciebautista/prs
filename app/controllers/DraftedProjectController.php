@@ -61,13 +61,13 @@ class DraftedProjectController extends \BaseController {
 			$project->city_id = Input::get('city_id');
 			$project->state_id = 1;
 			$project->save();
-			return Redirect::route('project.edit',$project->id)
+			return Redirect::action('DraftedProjectController@edit',$project->id)
 				->with('class', 'alert-success')
 				->with('message', 'Project successfuly created.');
 			
 		}
 
-		return Redirect::route('project.create')
+		return Redirect::action('DraftedProjectController@create')
 			->withErrors($validation)
 			->with('class', 'alert-danger')
 			->with('message', 'There were validation errors.');
@@ -99,7 +99,7 @@ class DraftedProjectController extends \BaseController {
 		
 		if (is_null($prj))
 		{
-			return Redirect::route('project.index')
+			return Redirect::action('DraftedProjectController@index')
 				->with('class', 'alert-danger')
 				->with('message', 'Project does not exist.');
 		}
@@ -124,7 +124,7 @@ class DraftedProjectController extends \BaseController {
 		
 		if (is_null($prj))
 		{
-			return Redirect::route('project.index')
+			return Redirect::action('DraftedProjectController@index')
 				->with('class', 'alert-danger')
 				->with('message', 'Project does not exist.');
 		}
@@ -148,12 +148,12 @@ class DraftedProjectController extends \BaseController {
 			}
 			$project->save();
 
-			return Redirect::route('project.edit', $id)
+			return Redirect::action('DraftedProjectController@edit', $id)
 				->with('class', 'alert-success')
 				->with('message', 'Project successfuly updated.');
 		}
 
-		return Redirect::route('project.edit', $id)
+		return Redirect::action('DraftedProjectController@edit', $id)
 			->withInput()
 			->withErrors($validation)
 			->with('class', 'alert-danger')
@@ -173,7 +173,7 @@ class DraftedProjectController extends \BaseController {
 		
 		if (is_null($prj))
 		{
-			return Redirect::route('project.index')
+			return Redirect::action('DraftedProjectController@index')
 				->with('class', 'alert-danger')
 				->with('message', 'Project does not exist.');
 		}
@@ -183,7 +183,7 @@ class DraftedProjectController extends \BaseController {
 			ProjectContact::where('project_id', $project->id)->delete();
 			$project->delete();
 		});
-		return Redirect::route('project.index')
+		return Redirect::action('DraftedProjectController@index')
 				->with('class', 'alert-success')
 				->with('message', 'Project successfully deleted.');
 	}

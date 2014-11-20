@@ -21,7 +21,14 @@ class Project extends \Eloquent {
 					$query->where('projects.state_id',$state_id);
 				}
 			})
-			->where('projects.project_name', 'LIKE' ,"%$filter%")
+			->where(function($query) use ($filter){
+				$query->where('projects.project_name', 'LIKE' ,"%$filter%")
+					->orwhere('projects.lot', 'LIKE' ,"%$filter%")
+					->orwhere('projects.street', 'LIKE' ,"%$filter%")
+					->orwhere('projects.brgy', 'LIKE' ,"%$filter%")
+					->orwhere('cities.city', 'LIKE' ,"%$filter%")
+					->orwhere('provinces.province', 'LIKE' ,"%$filter%");
+			})
 			->get();
 	}
 
@@ -103,8 +110,28 @@ class Project extends \Eloquent {
 						}
 					}
 				})
-				->orwhere('city_id',$project->city_id)
-				->get();
+				->orwhere('city_id',$project->city_id);
+			})
+			->get();
+	}
+
+	public static function publicProjects($filter){
+		return DB::table('projects')
+			->select('projects.*','cities.city','provinces.province','users.first_name', 'users.middle_name','users.last_name')
+			->join('cities', 'cities.id', '=', 'projects.city_id')
+			->join('provinces', 'provinces.id', '=', 'cities.province_id')
+			->join('users', 'users.id', '=', 'projects.assigned_to')
+			->where('projects.state_id',3)
+			->where(function($query) use ($filter){
+				$query->where('projects.project_name', 'LIKE' ,"%$filter%")
+					->orwhere('projects.lot', 'LIKE' ,"%$filter%")
+					->orwhere('projects.street', 'LIKE' ,"%$filter%")
+					->orwhere('projects.brgy', 'LIKE' ,"%$filter%")
+					->orwhere('cities.city', 'LIKE' ,"%$filter%")
+					->orwhere('provinces.province', 'LIKE' ,"%$filter%")
+					->orwhere('users.first_name', 'LIKE' ,"%$filter%")
+					->orwhere('users.middle_name', 'LIKE' ,"%$filter%")
+					->orwhere('users.last_name', 'LIKE' ,"%$filter%");
 			})
 			->get();
 	}

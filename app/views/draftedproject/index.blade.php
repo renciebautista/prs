@@ -24,7 +24,7 @@
 		 		{{ Form::text('s',Input::old('s'),array('class' => 'form-control', 'placeholder' => 'Search')) }}
 		  	</div>
 		  	<button type="submit" class="btn btn-success"><i class="fa fa-search"></i> Search</button>
-		  	<a href="{{ URL::route('project.create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Project</a>
+		  	<a href="{{ URL::action('DraftedProjectController@create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Project</a>
 		{{ Form::close() }}
 	</div>
 </div>
@@ -52,16 +52,16 @@
 						<td>{{ AccountHelper::address($project) }}</td>
 						@if($project->state_id < 3)
 						<td class="action">
-							{{ HTML::linkRoute('project.edit','Edit', $project->id, array('class' => 'btn btn-info btn-xs')) }}
+							{{ HTML::linkAction('DraftedProjectController@edit','Edit', $project->id, array('class' => 'btn btn-info btn-xs')) }}
 						</td>
 						<td class="action">
-							{{ Form::open(array('method' => 'DELETE', 'route' => array('project.destroy', $project->id))) }}                       
+							{{ Form::open(array('method' => 'DELETE', 'action' => array('DraftedProjectController@destroy', $project->id))) }}                       
 							{{ Form::submit('Delete', array('class'=> 'btn btn-danger btn-xs','onclick' => "if(!confirm('Are you sure to delete this record?')){return false;};")) }}
 							{{ Form::close() }}
 						</td>
 						@else
 						<td class="action">
-							{{ HTML::linkRoute('project.show','View', $project->id, array('class' => 'btn btn-info btn-xs')) }}
+							{{ HTML::linkAction('DraftedProjectController@show','View', $project->id, array('class' => 'btn btn-info btn-xs')) }}
 						</td>
 						@endif
 					</tr>

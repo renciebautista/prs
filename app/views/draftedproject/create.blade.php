@@ -7,7 +7,7 @@
 <div class="row">
 
 	<div class="col-lg-12">
-	{{ Form::open(array('route' => 'project.store','class' => 'bs-component')) }}
+	{{ Form::open(array('action' => 'DraftedProjectController@store','class' => 'bs-component')) }}
 		<div class="form-group">
 			<div class="row">
 				<div class="col-lg-12">
@@ -49,7 +49,7 @@
 		</div>
 		<div class="form-group">
 			{{ Form::submit('Submit', array('class' => 'btn btn-primary')) }}
-			{{ HTML::linkRoute('account.index', 'Back', array(), array('class' => 'btn btn-default')) }}
+			{{ HTML::linkAction('DraftedProjectController@index', 'Back', array(), array('class' => 'btn btn-default')) }}
 		</div>
 
 		

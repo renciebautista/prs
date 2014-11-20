@@ -69,7 +69,7 @@ class ProjectApprovalController extends \BaseController {
 		
 		if (is_null($prj))
 		{
-			return Redirect::route('projectapproval.index')
+			return Redirect::action('ProjectApprovalController@index')
 				->with('class', 'alert-danger')
 				->with('message', 'Project does not exist.');
 		}
@@ -94,7 +94,7 @@ class ProjectApprovalController extends \BaseController {
 		
 		if (is_null($prj))
 		{
-			return Redirect::route('projectapproval.index')
+			return Redirect::action('ProjectApprovalController@index')
 				->with('class', 'alert-danger')
 				->with('message', 'Project does not exist.');
 		}
@@ -102,18 +102,42 @@ class ProjectApprovalController extends \BaseController {
 		Input::merge(array_map('trim', Input::all()));
 		$input = Input::all();
 
-		$project = Project::find($id);
-		$project->assigned_by = Auth::id();
-		$project->assigned_to = Input::get('assign_to');
-		if(Input::has('assign')){
-			$project->state_id = 3;
+		$rules = array(
+			'remarks' => 'required'
+		);
 
+		$validation = Validator::make($input,$rules);
+		if($validation->passes())
+		{
+			$project = Project::find($id);
+			$project->assigned_by = Auth::id();
+			$project->remarks = Input::get('remarks');
+			if(Input::has('assign')){
+				$project->state_id = 3;
+				$project->assigned_to = Input::get('assign_to');
+				$project->save();
+			}
+			elseif (Input::has('deny')) {
+				$project->state_id = 4;
+				$project->save();
+			}else{
+				return Redirect::action('ProjectApprovalController@edit', $id)
+					->withInput()
+					->withErrors($validation)
+					->with('class', 'alert-danger')
+					->with('message', 'There were validation errors.');
+			}
+			
+			return Redirect::action('ProjectApprovalController@index')
+				->with('class', 'alert-success')
+				->with('message', 'Project successfuly updated.');
 		}
-		$project->save();
 
-		return Redirect::route('projectapproval.index')
-			->with('class', 'alert-success')
-			->with('message', 'Project successfuly updated.');
+		return Redirect::route('projectapproval.edit', $id)
+			->withInput()
+			->withErrors($validation)
+			->with('class', 'alert-danger')
+			->with('message', 'There were validation errors.');
 	}
 
 	/**

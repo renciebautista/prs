@@ -60,11 +60,11 @@
 						<li class="dropdown">
 							<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Projects <span class="caret"></span></a>
 							<ul class="dropdown-menu" aria-labelledby="download">
-								<li><a href="./sales/create">Public Projects</a></li>
-								<li>{{ HTML::linkRoute('project.index', 'Drafted Projects') }}</li>
-								<li><a href="./bootstrap.css">Assigned Projects</a></li>
+								<li>{{ HTML::linkAction('PublicProjectController@index', 'Public Projects') }}</li>
+								<li>{{ HTML::linkAction('DraftedProjectController@index', 'Drafted Projects') }}</li>
+								<li>{{ HTML::linkAction('AssignedProjectController@index', 'Assigned Projects') }}</li>
 								<li class="divider"></li>
-								<li>{{ HTML::linkRoute('projectapproval.index', 'Approve Projects') }}</a></li>
+								<li>{{ HTML::linkAction('ProjectApprovalController@index', 'Approve Projects') }}</li>
 							</ul>
 						</li>
 
