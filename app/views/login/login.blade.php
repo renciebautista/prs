@@ -6,7 +6,8 @@
 <div class="bs-docs-section">
 
 	<div class="row">
-		<div class="col-lg-8">
+		<div class="col-lg-8 hidden-xs">
+			{{ HTML::image('assets/images/landing.jpg','500x500', array('class' => 'featurette-image img-responsive',  'data-holder-rendered' => 'true' , 'data-src' => 'holder.js/500x500/auto')) }}
 		</div>
 		<div class="col-lg-4">
 			<div class="page-header" id="banner">

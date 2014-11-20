@@ -39,7 +39,7 @@
 						<td>{{ AccountHelper::address($project) }}</td>
 						<td>{{ UserHelper::fullname($project) }}</td>
 						<td class="action">
-							{{ HTML::linkAction('PublicProjectController@edit','Join', $project->id, array('class' => 'btn btn-success btn-xs')) }}
+							{{ HTML::linkAction('PublicProjectController@show','Join', $project->id, array('class' => 'btn btn-success btn-xs')) }}
 						</td>
 					</tr>
 					@endforeach

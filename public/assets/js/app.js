@@ -20,7 +20,7 @@ $(document).ready(function(){
 						$(".contact-info").each(function() {
 							$(this).submit(function( event ) {
 								event.preventDefault();
-								console.log($(this));
+								// console.log($(this));
 								var a = $(this).serialize();
 								$.ajax({
 									type:'post',

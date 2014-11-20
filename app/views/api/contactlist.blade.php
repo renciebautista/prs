@@ -17,7 +17,7 @@
 			<td>{{ ContactHelper::fullname($contact) }}</td>
 			<td>{{ $contact->account_name }}</td>
 			<td class="action">
-				{{ Form::open(array('action' => 'api\ProjectController@create','class' => 'contact-info bs-component')) }}
+				{{ Form::open(array('action' => 'api\ProjectController@store','class' => 'contact-info bs-component')) }}
 				{{ Form::hidden('project_id', $project) }}           
 				{{ Form::hidden('group_id', $group) }}  
 				{{ Form::hidden('contact_id', $contact->id) }}                  

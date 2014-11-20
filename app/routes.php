@@ -13,7 +13,8 @@
 
 Route::get('/', function()
 {
-	return View::make('hello');
+	// return View::make('hello');
+	return Redirect::action('DashboardController@index');
 });
 
 
@@ -30,10 +31,11 @@ Route::group(array('before' => 'auth'), function()
 	Route::resource('role', 'RoleController');
 	Route::get('role/{id}/manageprivilleges', array('as' => 'role.manageprivilleges', 'uses' => 'RoleController@manageprivilleges'));
 
-	Route::get('contact/lists/', 'ContactController@lists');
-	Route::get('contact/lists/{project_id}/{group_id}', 'ContactController@lists');
 
+	Route::get('contact/joinedlists/{project_id}/{group_id}', 'ContactController@joinedlists');
+	Route::get('contact/lists/{project_id}/{group_id}', 'ContactController@lists');
 	Route::resource('contact', 'ContactController');
+
 
 	Route::resource('account', 'AccountController');
 
@@ -63,7 +65,7 @@ Route::group(array('before' => 'auth'), function()
 	Route::group(array('prefix' => 'public'), function()
 	{
 		Route::get('project', 'PublicProjectController@index');
-		Route::get('project/{id}/join', 'PublicProjectController@edit');
+		Route::get('project/{id}', 'PublicProjectController@show');
 	});
 
 	// assigned projects
@@ -77,8 +79,12 @@ Route::group(array('before' => 'auth'), function()
 	Route::group(array('prefix' => 'api'), function()
 	{
 		Route::get('contact/search', 'api\ContactController@index');
-		Route::post('project/addcontact', 'api\ProjectController@create');
+
 		Route::get('project/contacts/{id}', 'api\ProjectContactController@show');
+		Route::post('project/addcontact', 'api\ProjectController@store');
+		
+		Route::get('project/joinedcontact/{id}', 'api\ProjectContactController@joinedcontact');
+		Route::post('project/joincontact', 'api\ProjectController@joincontact');
 	});
 
 	

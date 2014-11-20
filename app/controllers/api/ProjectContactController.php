@@ -50,6 +50,19 @@ class ProjectContactController extends \BaseController {
 	}
 
 	/**
+	 * Display the specified resource.
+	 * GET /api/projectcontact/{id}
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function joinedcontact($id)
+	{
+		$contacts = \ProjectContact::joinedContacts(\Auth::id(),$id);
+		return \View::make('api.joinedcontacts', compact('contacts'));
+	}
+
+	/**
 	 * Show the form for editing the specified resource.
 	 * GET /api/projectcontact/{id}/edit
 	 *

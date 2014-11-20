@@ -41,6 +41,16 @@ class Project extends \Eloquent {
 			->first();
 	}
 
+	public static function publicDetails($id){
+		return DB::table('projects')
+			->select('projects.*','cities.city','provinces.province','users.first_name', 'users.middle_name','users.last_name')
+			->join('cities', 'cities.id', '=', 'projects.city_id')
+			->join('provinces', 'provinces.id', '=', 'cities.province_id')
+			->join('users', 'users.id', '=', 'projects.assigned_to')
+			->where('projects.id', $id)
+			->first();
+	}
+
 	public static function forApproval($filter){
 		return DB::table('projects')
 			->select('projects.*','cities.city','provinces.province','users.first_name', 'users.middle_name','users.last_name')

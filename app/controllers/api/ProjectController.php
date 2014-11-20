@@ -22,6 +22,17 @@ class ProjectController extends \BaseController {
 	 */
 	public function create()
 	{
+		
+	}
+
+	/**
+	 * Store a newly created resource in storage.
+	 * POST /api/project
+	 *
+	 * @return Response
+	 */
+	public function store()
+	{
 		$projectcontact = new \ProjectContact;
 		$projectcontact->project_id = \Input::get('project_id');
 		$projectcontact->contact_id = \Input::get('contact_id');
@@ -37,9 +48,17 @@ class ProjectController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function joincontact()
 	{
-		//
+		$projectcontact = new \ProjectContact;
+		$projectcontact->project_id = \Input::get('project_id');
+		$projectcontact->contact_id = \Input::get('contact_id');
+		$projectcontact->group_id = \Input::get('group_id');
+		$projectcontact->joined = 1;
+		$projectcontact->approved = 1;
+		$projectcontact->save();
+
+		return \Response::json(array('error' => false),200);
 	}
 
 	/**

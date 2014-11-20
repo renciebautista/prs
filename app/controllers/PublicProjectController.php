@@ -50,7 +50,10 @@ class PublicProjectController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		$pagetitle = 'Join Project';
+		$project = Project::publicDetails($id);
+		$accountgroups = AccountGroup::all();
+		return View::make('publicproject.show', compact('pagetitle', 'project', 'accountgroups'));
 	}
 
 	/**

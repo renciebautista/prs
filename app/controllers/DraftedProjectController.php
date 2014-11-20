@@ -94,7 +94,6 @@ class DraftedProjectController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		
 		$prj = $this->allowEdit($id);
 		
 		if (is_null($prj))
