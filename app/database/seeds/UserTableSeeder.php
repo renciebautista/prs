@@ -7,6 +7,7 @@ class UserTableSeeder extends Seeder {
 
 	public function run()
 	{
+		DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 		DB::table('departments')->truncate();
 	    $department = new Department;
 	    $department->department_desc = 'ADMIN';
@@ -31,6 +32,7 @@ class UserTableSeeder extends Seeder {
 	    $user->save();
 
 		$user->roles()->attach($role->id); // id only
+		DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 	}
 
 }
