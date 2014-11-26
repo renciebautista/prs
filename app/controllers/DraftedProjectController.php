@@ -52,6 +52,7 @@ class DraftedProjectController extends \BaseController {
 
 		if($validation->passes())
 		{
+			$coordinates = explode(',', Input::get('coordinates'));
 			$project = new Project;
 			$project->created_by = Auth::id();
 			$project->project_name =  strtoupper(Input::get('project_name'));
@@ -60,6 +61,8 @@ class DraftedProjectController extends \BaseController {
 			$project->brgy = strtoupper(Input::get('brgy'));
 			$project->city_id = Input::get('city_id');
 			$project->state_id = 1;
+			$project->lat = $coordinates[1]; 
+			$project->lng = $coordinates[0]; 
 			$project->save();
 			return Redirect::action('DraftedProjectController@edit',$project->id)
 				->with('class', 'alert-success')
@@ -69,6 +72,7 @@ class DraftedProjectController extends \BaseController {
 
 		return Redirect::action('DraftedProjectController@create')
 			->withErrors($validation)
+			->withInput()
 			->with('class', 'alert-danger')
 			->with('message', 'There were validation errors.');
 	}
@@ -134,6 +138,7 @@ class DraftedProjectController extends \BaseController {
 		$validation = Validator::make($input, Project::$rules);
 		if ($validation->passes())
 		{
+			$coordinates = explode(',', Input::get('coordinates'));
 			$project = Project::find($id);
 			
 			$project->project_name =  strtoupper(Input::get('project_name'));
@@ -145,6 +150,8 @@ class DraftedProjectController extends \BaseController {
 				$project->state_id = 2;
 
 			}
+			$project->lat = $coordinates[1]; 
+			$project->lng = $coordinates[0]; 
 			$project->save();
 
 			return Redirect::action('DraftedProjectController@edit', $id)

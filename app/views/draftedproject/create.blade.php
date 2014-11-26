@@ -50,6 +50,16 @@
 				</div>
 			</div>
 		</div>
+		<div class="form-group">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="form-group">
+						{{ Form::label('coordinates', 'Coordinates', array('class' => 'control-label')) }}
+						{{ Form::text('coordinates','',array('class' => 'form-control', 'readonly')) }}
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 	<div class="col-lg-6">
 		<div id="map" style="height: 400px; width: 100%;"></div>
@@ -128,7 +138,8 @@
         });
         map.on('singleclick', function (evt) {
             iconGeometry.setCoordinates(evt.coordinate);
-            console.log(ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326'));
+            //console.log(ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326'));
+            $('#coordinates').val(ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326'));
         });
 
 @stop

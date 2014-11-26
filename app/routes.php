@@ -59,6 +59,9 @@ Route::group(array('before' => 'auth'), function()
 		Route::get('project', 'ProjectApprovalController@index');
 		Route::get('project/{id}/edit', 'ProjectApprovalController@edit');
 		Route::put('project/{id}', 'ProjectApprovalController@update');
+
+		Route::get('contact', 'ApproveContactController@index');
+		Route::put('contact/{id}', 'ApproveContactController@update');
 	});
 
 	// public projects
@@ -72,6 +75,14 @@ Route::group(array('before' => 'auth'), function()
 	Route::group(array('prefix' => 'assigned'), function()
 	{
 		Route::get('project', 'AssignedProjectController@index');
+		Route::get('project/{id}', 'AssignedProjectController@show');
+	});
+
+	// joined projects
+	Route::group(array('prefix' => 'joined'), function()
+	{
+		Route::get('project', 'JoinedProjectController@index');
+		Route::get('project/{id}', 'JoinedProjectController@show');
 	});
 
 

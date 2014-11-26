@@ -1,6 +1,6 @@
 <?php
 
-class Account extends Eloquent {
+class _Account extends Eloquent {
 	protected $fillable = [];
 
 	public static $rules = array(

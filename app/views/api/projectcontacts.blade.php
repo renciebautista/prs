@@ -9,7 +9,7 @@
 	<tbody>
 		@if(count($contacts) == 0)
 		<tr>
-			<td colspan="2">No record found!</td>
+			<td colspan="3">No record found!</td>
 		</tr>
 		@else
 		@foreach($contacts as $contact)

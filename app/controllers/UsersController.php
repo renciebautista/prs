@@ -17,7 +17,7 @@ class UsersController extends Controller
 	public function index()
 	{
 		$pagetitle = 'User List';
-		$users = User::all();
+		$users = User::appUsers();
 		return View::make('user.index', compact('users', 'pagetitle'));
 	}
 

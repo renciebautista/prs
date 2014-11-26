@@ -5,7 +5,8 @@ class Project extends \Eloquent {
 
 	public static $rules = array(
 		'project_name' => 'required',
-		'city_id' => 'required'
+		'city_id' => 'required',
+		'coordinates' => 'required'
 	);
 
 	public static function myDraftedProject($user_id,$state_id,$filter){
@@ -143,6 +144,42 @@ class Project extends \Eloquent {
 					->orwhere('users.middle_name', 'LIKE' ,"%$filter%")
 					->orwhere('users.last_name', 'LIKE' ,"%$filter%");
 			})
+			->get();
+	}
+
+	public static function assigned($user_id, $filter){
+		return DB::table('projects')
+			->select('projects.*','cities.city','provinces.province','users.first_name', 'users.middle_name','users.last_name')
+			->join('cities', 'cities.id', '=', 'projects.city_id')
+			->join('provinces', 'provinces.id', '=', 'cities.province_id')
+			->join('users', 'users.id', '=', 'projects.assigned_to')
+			->where('projects.state_id',3)
+			->where('projects.assigned_to',$user_id)
+			->where(function($query) use ($filter){
+				$query->where('projects.project_name', 'LIKE' ,"%$filter%")
+					->orwhere('projects.lot', 'LIKE' ,"%$filter%")
+					->orwhere('projects.street', 'LIKE' ,"%$filter%")
+					->orwhere('projects.brgy', 'LIKE' ,"%$filter%")
+					->orwhere('cities.city', 'LIKE' ,"%$filter%")
+					->orwhere('provinces.province', 'LIKE' ,"%$filter%")
+					->orwhere('users.first_name', 'LIKE' ,"%$filter%")
+					->orwhere('users.middle_name', 'LIKE' ,"%$filter%")
+					->orwhere('users.last_name', 'LIKE' ,"%$filter%");
+			})
+			->get();
+	}
+
+	public static function joined($user_id, $filter){
+		return DB::table('project_contacts')
+			->select('projects.*','cities.city','provinces.province','users.first_name', 'users.middle_name','users.last_name')
+			->join('contacts', 'contacts.id', '=', 'project_contacts.contact_id')
+			->join('projects', 'projects.id', '=', 'project_contacts.project_id')
+			->join('cities', 'cities.id', '=', 'projects.city_id')
+			->join('provinces', 'provinces.id', '=', 'cities.province_id')
+			->join('users', 'users.id', '=', 'projects.assigned_to')
+			->where('project_contacts.status', 2)
+			->where('contacts.created_by', $user_id)
+			->groupBy('projects.project_name')
 			->get();
 	}
 }

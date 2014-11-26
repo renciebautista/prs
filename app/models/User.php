@@ -42,4 +42,11 @@ class User extends Eloquent implements ConfideUserInterface {
 			->orderBy('user')
 			->lists('user', 'id');
 	}
+
+	public static function appUsers(){
+		return  User::join('assigned_roles', 'assigned_roles.user_id', '=', 'users.id')
+			->where('role_id', '>', 1)
+			->orderBy('first_name')
+			->get();
+	}
 }

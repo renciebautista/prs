@@ -55,7 +55,7 @@ class ProjectController extends \BaseController {
 		$projectcontact->contact_id = \Input::get('contact_id');
 		$projectcontact->group_id = \Input::get('group_id');
 		$projectcontact->joined = 1;
-		$projectcontact->approved = 1;
+		$projectcontact->status = 1;
 		$projectcontact->save();
 
 		return \Response::json(array('error' => false),200);

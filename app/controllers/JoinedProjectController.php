@@ -1,24 +1,24 @@
 <?php
 
-class AssignedProjectController extends \BaseController {
+class JoinedProjectController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.
-	 * GET /assignedproject
+	 * GET /joinedproject
 	 *
 	 * @return Response
 	 */
 	public function index()
 	{
-		$pagetitle = 'Assigned Projects';
+		$pagetitle = 'Joined Projects';
 		Input::flash();
-		$projects = Project::assigned(Auth::id(),Input::get('s'));
-		return View::make('assignedproject.index',compact('pagetitle', 'projects'));
+		$projects = Project::joined(Auth::id(),Input::get('s'));
+		return View::make('joinedproject.index',compact('pagetitle', 'projects'));
 	}
 
 	/**
 	 * Show the form for creating a new resource.
-	 * GET /assignedproject/create
+	 * GET /joinedproject/create
 	 *
 	 * @return Response
 	 */
@@ -29,7 +29,7 @@ class AssignedProjectController extends \BaseController {
 
 	/**
 	 * Store a newly created resource in storage.
-	 * POST /assignedproject
+	 * POST /joinedproject
 	 *
 	 * @return Response
 	 */
@@ -40,7 +40,7 @@ class AssignedProjectController extends \BaseController {
 
 	/**
 	 * Display the specified resource.
-	 * GET /assignedproject/{id}
+	 * GET /joinedproject/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -52,7 +52,7 @@ class AssignedProjectController extends \BaseController {
 
 	/**
 	 * Show the form for editing the specified resource.
-	 * GET /assignedproject/{id}/edit
+	 * GET /joinedproject/{id}/edit
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -64,7 +64,7 @@ class AssignedProjectController extends \BaseController {
 
 	/**
 	 * Update the specified resource in storage.
-	 * PUT /assignedproject/{id}
+	 * PUT /joinedproject/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -76,7 +76,7 @@ class AssignedProjectController extends \BaseController {
 
 	/**
 	 * Remove the specified resource from storage.
-	 * DELETE /assignedproject/{id}
+	 * DELETE /joinedproject/{id}
 	 *
 	 * @param  int  $id
 	 * @return Response

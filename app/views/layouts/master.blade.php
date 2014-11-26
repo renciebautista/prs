@@ -43,7 +43,7 @@
 				</div>
 				<div class="navbar-collapse collapse" id="navbar-main">
 					<ul class="nav navbar-nav">
-						@if(Auth::user()->hasRole("ADMIN"))
+						@if(Auth::user()->hasRole("ADMINISTRATOR"))
 						<li class="dropdown">
 							<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Settings<span class="caret"></span></a>
 							<ul class="dropdown-menu" aria-labelledby="themes">
@@ -58,14 +58,17 @@
 							</ul>
 						</li>
 						@endif
+						@if(!Auth::user()->hasRole("ADMINISTRATOR"))
 						<li class="dropdown">
 							<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Projects <span class="caret"></span></a>
 							<ul class="dropdown-menu" aria-labelledby="download">
 								<li>{{ HTML::linkAction('PublicProjectController@index', 'Public Projects') }}</li>
 								<li>{{ HTML::linkAction('DraftedProjectController@index', 'Drafted Projects') }}</li>
 								<li>{{ HTML::linkAction('AssignedProjectController@index', 'Assigned Projects') }}</li>
+								<li>{{ HTML::linkAction('JoinedProjectController@index', 'Joined Projects') }}</li>
 								<li class="divider"></li>
 								<li>{{ HTML::linkAction('ProjectApprovalController@index', 'Approve Projects') }}</li>
+								<li>{{ HTML::linkAction('ApproveContactController@index', 'Approve Project Contacts') }}</li>
 							</ul>
 						</li>
 
@@ -83,6 +86,7 @@
 								<li><a href="./bootstrap.css">Inventory Report</a></li>
 							</ul>
 						</li>
+						@endif
 						<li>
 							<a href="../help/">Help</a>
 						</li>
@@ -153,6 +157,7 @@
 		<!-- {{ HTML::script('assets/plugins/twitter-bootstrap/js/bootswatch.js') }} -->
 		<script src="http://openlayers.org/en/v3.0.0/build/ol.js" type="text/javascript"></script>
 		{{ HTML::script('assets/js/highlight.js') }}
+		{{ HTML::script('assets/js/map.js') }}
 		{{ HTML::script('assets/js/app.js') }}
 		<script type="text/javascript">
 		$(document).ready(function() {

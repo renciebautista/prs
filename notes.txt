@@ -1,0 +1,3 @@
+http://www.openstreetmap.org/#map=[Zoom Level]/[Latitude]/[Longitude]&layers=[Layer code]
+http://www.openstreetmap.org/#map=8/12.538/126.409
+

@@ -31,7 +31,7 @@
 					@else
 					@foreach($users as $user)
 					<tr>
-						<td>{{ $user->getFullname() }}</td>
+						<td>{{ UserHelper::fullname($user) }}</td>
 						<td>{{ $user->department->department_desc }}</td>
 						<td>
 							@foreach($user->roles as $role)

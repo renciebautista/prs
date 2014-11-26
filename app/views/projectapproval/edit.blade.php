@@ -44,6 +44,7 @@
 				</div>
 			</div>
 		</div>
+
 		<div class="form-group">
 			<div class="row">
 				<div class="col-lg-12">
@@ -60,6 +61,18 @@
 				</div>
 			</div>
 		</div>
+	</div>
+
+	<div class="col-lg-6">
+		<div class="form-group">
+			<div class="row">
+				<div class="col-lg-12">
+					<div id="map" style="height: 400px; width: 100%;"></div>
+				</div>
+			</div>
+		</div>
+		
+		
 	</div>
 	
 	<div class="col-lg-6">
@@ -152,4 +165,9 @@
 @section('page-script')
 	var searchTerms = [$('#project_name').val(), $('#lot').val(), $('#street').val(), $('#brgy').val(),$('#city_id').val().replace("-", "")];
 	$("#similar tbody").highlightTermsIn(searchTerms); 
+
+	$('#map').staticmap({
+		lat: {{ $project->lat }},
+		lng: {{ $project->lng }}
+	});
 @stop

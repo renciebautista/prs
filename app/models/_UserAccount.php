@@ -1,6 +1,6 @@
 <?php
 
-class UserAccount extends \Eloquent {
+class _UserAccount extends \Eloquent {
 	protected $fillable = [];
 
 	public static function myAccounts($user_id,$filter){

@@ -4,7 +4,7 @@
 
 <div class="row">
 	{{ Form::open(array('action' => array('DraftedProjectController@update', $project->id), 'method' => 'PUT', 'class' => 'bs-component')) }}
-	<div class="col-lg-12">
+	<div class="col-lg-6">
 		<div class="form-group">
 			<div class="row">
 				<div class="col-lg-12">
@@ -16,25 +16,29 @@
 		<div class="form-group">
 			{{ Form::label('account_address', 'Project Address', array('class' => 'control-label')) }}
 			<div class="row">
-				<div class="col-lg-3">
+				<div class="col-lg-6">
 					<div class="form-group">
 						{{ Form::label('lot', 'Lot / Blk / House No. / Unit No.', array('class' => 'control-label')) }}
 						{{ Form::text('lot', $project->lot, array('class' => 'form-control', 'placeholder' => 'Lot / Blk / House No. / Unit No.')) }}
 					</div>
 				</div>
-				<div class="col-lg-3">
+				<div class="col-lg-6">
 					<div class="form-group">
 						{{ Form::label('street', 'Street', array('class' => 'control-label')) }}
 						{{ Form::text('street', $project->street, array('class' => 'form-control', 'placeholder' => 'Street')) }}
 					</div>
 				</div>
-				<div class="col-lg-3">
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="row">
+				<div class="col-lg-6">
 					<div class="form-group">
 						{{ Form::label('brgy', 'Brgy. / Subdivision', array('class' => 'control-label')) }}
 						{{ Form::text('brgy', $project->brgy, array('class' => 'form-control', 'placeholder' => 'Brgy. / Subdivision')) }}
 					</div>
 				</div>
-				<div class="col-lg-3">
+				<div class="col-lg-6">
 					<div class="form-group">
 						{{ Form::label('city_id', 'Town / City', array('class' => 'control-label')) }}
 						{{ Form::select('city_id',$cities, $project->city_id, array('class' => 'form-control')) }}
@@ -42,6 +46,22 @@
 				</div>
 			</div>
 		</div>
+		<div class="form-group">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="form-group">
+						{{ Form::label('coordinates', 'Coordinates', array('class' => 'control-label')) }}
+						{{ Form::text('coordinates',$project->lng.','.$project->lat,array('class' => 'form-control', 'readonly')) }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-lg-6">
+		<div id="map" style="height: 400px; width: 100%;"></div>
+	</div>
+	<div class="col-lg-12">
 		<div class="form-group">
 			<input class="btn btn-primary" type="submit" name="update" id="update" value="Update">
 			<input class="btn btn-warning" type="submit" name="post" id="post" value="Post">
@@ -61,7 +81,7 @@
 		  		<div>
 					<div class="btn-group dropup">
 						<a class="btn btn-success btn-xs dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-							<i class="fa fa-plus"></i> Contact</a>
+							<i class="fa fa-plus"></i> Contact
 						</a>
 						<ul class="dropdown-menu">
 							@foreach($accountgroups as $accountgroup)
@@ -106,4 +126,9 @@
 	}
 	
 	update_contact();
+
+	$('#map').setmap({
+		lat: {{ $project->lat }},
+		lng: {{ $project->lng }}
+	});
 @stop
