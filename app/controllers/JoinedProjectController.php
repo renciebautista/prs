@@ -17,28 +17,6 @@ class JoinedProjectController extends \BaseController {
 	}
 
 	/**
-	 * Show the form for creating a new resource.
-	 * GET /joinedproject/create
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
-
-	/**
-	 * Store a newly created resource in storage.
-	 * POST /joinedproject
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
-	}
-
-	/**
 	 * Display the specified resource.
 	 * GET /joinedproject/{id}
 	 *
@@ -47,7 +25,11 @@ class JoinedProjectController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+
+		$pagetitle = 'Project Details';
+		$project = Project::details($id);
+		$contacts = ProjectContact::contacts($id);
+		return View::make('joinedproject.show', compact('pagetitle', 'project', 'contacts'));
 	}
 
 	/**

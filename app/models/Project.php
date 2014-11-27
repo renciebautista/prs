@@ -179,6 +179,17 @@ class Project extends \Eloquent {
 			->join('users', 'users.id', '=', 'projects.assigned_to')
 			->where('project_contacts.status', 2)
 			->where('contacts.created_by', $user_id)
+			->where(function($query) use ($filter){
+				$query->where('projects.project_name', 'LIKE' ,"%$filter%")
+					->orwhere('projects.lot', 'LIKE' ,"%$filter%")
+					->orwhere('projects.street', 'LIKE' ,"%$filter%")
+					->orwhere('projects.brgy', 'LIKE' ,"%$filter%")
+					->orwhere('cities.city', 'LIKE' ,"%$filter%")
+					->orwhere('provinces.province', 'LIKE' ,"%$filter%")
+					->orwhere('users.first_name', 'LIKE' ,"%$filter%")
+					->orwhere('users.middle_name', 'LIKE' ,"%$filter%")
+					->orwhere('users.last_name', 'LIKE' ,"%$filter%");
+			})
 			->groupBy('projects.project_name')
 			->get();
 	}

@@ -44,6 +44,8 @@ $(document).ready(function(){
             iconGeometry.setCoordinates(evt.coordinate);
             $('#coordinates').val(ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326'));
         });
+
+        
   	}
 
     $.fn.staticmap = function(coordinate) {
