@@ -27,8 +27,8 @@
 		{{ Form::open(array('action' => 'SessionController@doLogin','class' => 'bs-component')) }}
 
 			<div class="form-group">
-				{{ Form::label('email', 'Username or Email', array('class' => 'control-label')) }}
-				{{ Form::text('email','',array('class' => 'form-control', 'placeholder' => 'Username or Email')) }}
+				{{ Form::label('username', 'Username', array('class' => 'control-label')) }}
+				{{ Form::text('username','',array('class' => 'form-control', 'placeholder' => 'Username')) }}
 			</div>
 
 			<div class="form-group">

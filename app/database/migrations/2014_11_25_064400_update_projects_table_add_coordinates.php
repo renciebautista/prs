@@ -14,8 +14,8 @@ class UpdateProjectsTableAddCoordinates extends Migration {
 	{
 		Schema::table('projects', function(Blueprint $table)
 		{
-			$table->double('lat', 15, 14)->after('remarks');
-			$table->double('lng', 15, 14)->after('lat');
+			$table->double('lat', 25, 18)->after('remarks');
+			$table->double('lng', 25, 18)->after('lat');
 		});
 	}
 
